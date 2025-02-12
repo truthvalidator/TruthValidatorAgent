@@ -77,7 +77,7 @@ graph TD
 * **Blockchain:** EVM-compatible, Solidity, Web3 (go-ethereum)
 * **Telegram Bot API:** `telegram-bot` (Golang)
 
-## Integrating Filecoin into TruthValidatorAgent provides numerous benefits
+## Integration with Filecoin storage
 
 * **Data Integrity:** Voting evidence is stored in a decentralized, tamper-proof manner.
 * **Persistent Storage:** Ensures long-term availability of evidence, safeguarding against data loss.

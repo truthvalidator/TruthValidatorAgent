@@ -65,16 +65,16 @@ graph TD
 **Components:**
 
 * **Smart Contract (Solidity):** Manages proposals and voting on EVM blockchains.
+* **Filecoin storage and retrieval(Filecoin lassie & Storacha):** Decentralized storage for voting evidence, ensuring data integrity and accessibility.
 * **AI Agent (Golang):** Uses RAG-based analysis for judgment and participates in voting.
 * **AI Search Module (Golang):** Retrieves web information using SearxNG.
 * **Telegram Bot (Golang):** Serves as the user interface for submissions and results.
-* **Filecoin Storage:** Decentralized storage for voting evidence, ensuring data integrity and accessibility.
 
 ## Technologies
 
 * **AI:** RAG, LLM, Metasearch API
-* **Filecoin:** Decentralized storage for voting evidence
-* **Blockchain:** EVM-compatible, Solidity, Web3 (go-ethereum)
+* **Filecoin:** Decentralized storage for voting evidence(Filecoin lassie & Storacha)
+* **Blockchain:** EVM-compatible, Solidity
 * **Telegram Bot API:** `telegram-bot` (Golang)
 
 ## Integration with Filecoin storage

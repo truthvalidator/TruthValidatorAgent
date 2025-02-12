@@ -1,0 +1,24 @@
+FROM golang:1.22.5-alpine AS builder
+
+RUN apk add --no-cache git ca-certificates
+
+WORKDIR /go/src/VerifyProposalAIAgent
+
+COPY .. . 
+
+RUN go mod download
+
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /go/bin/TruthValidator-tgbot -ldflags "-s -w" ./tgbot 
+
+FROM ubuntu:22.04
+WORKDIR /root/
+
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /go/bin/TruthValidator-tgbot /root/TruthValidator-tgbot
+
+RUN chmod +x /root/TruthValidator-tgbot
+
+
+CMD ["/root/TruthValidator-tgbot", ""]

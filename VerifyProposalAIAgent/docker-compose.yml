@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tvsn-tgbot:
+    build:
+      context: . 
+      dockerfile: docker/Dockerfile  
+    container_name: tvsn-tgbot
+    environment:
+      TG_BOT_TOKEN: ""  
+      TG_BOT_ADMINS: "" 
+      TG_BOT_WHITELIST: ""
+      AI_SEARCH_URL: "",
+    volumes:
+      - ./whitelist.json:/root/whitelist.json  
+    command: ["/root/TruthValidator-tgbot", "aisearch"]
+    restart: always 

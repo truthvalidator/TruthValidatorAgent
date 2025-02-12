@@ -1,7 +1,7 @@
 
 # TruthValidatorAgent
 
-**Decentralized Information Verification System powered by AI Agent, Trusted Storage and Blockchain.
+**Decentralized Information Verification System powered by AI Agent, Trusted Storage and Blockchain.**
 
 ## Project Overview
 

@@ -33,7 +33,7 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 
 ## System Architecture
 
-![System Architecture](./docs/imgs/arch.png)
+![System Architecture](./docs/imgs/arch_new.png)
 
 **Components:**
 

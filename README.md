@@ -34,31 +34,6 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 ## System Architecture
 
 ![System Architecture](./docs/imgs/arch.png)
-<div style="display: none;">
-```mermaid
-graph TD
-    A[User Client] -->|1.Submit Proposal| B[Smart Contract]
-    B -->|2.Trigger ProposalSubmitted Event| C[AI Agent & Vote Node]
-    C -->|3.Call AI Model & RAG| D[AI Model & RAG]
-    D -->|4.Return Judgment Result| C
-    C -->|5.Generate Voting Evidence| E[Filecoin Storage Network]
-    E -->|6.Store Evidence & Return CID| C
-    C -->|7.Submit Vote with evidence to Smart Contract| B
-    B -->|8.Trigger Finalized Event| F[Telegram Bot]
-    F -->|9.Response Result| G[Telegram Bot]
-    G -->|10.User Reply| A
-
-    classDef contract fill:#f9f,stroke:#333;
-    classDef agent fill:#ccf,stroke:#333;
-    classDef model fill:#9f9,stroke:#333;
-    classDef bot fill:#f96,stroke:#333;
-    classDef storage fill:#aaf,stroke:#333;
-    class B contract
-    class C agent
-    class D model
-    class E storage
-    class G bot
-</div>
 
 **Components:**
 

@@ -5,7 +5,7 @@
 
 ## Project Overview
 
-TruthValidatorAgent is an open-source system designed to combat misinformation by providing a transparent and efficient way to verify information. It combines **smart contracts**, **AI Agents (AI RAG-based)**, and **on-chain voting** to assess the authenticity of user-submitted proposals.
+TruthValidatorAgent is an open-source system designed to combat misinformation by providing a transparent and efficient way to verify information. It combines **smart contracts**, **AI Agents (AI Search-based)**, and **on-chain voting** to assess the authenticity of user-submitted proposals.
 
 Users submit proposals to blockchain smart contracts through **robots**. The system then:
 

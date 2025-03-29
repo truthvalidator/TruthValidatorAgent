@@ -35,35 +35,170 @@ A decentralized network combining:
    - Content-addressed cryptographic proofs  
 
 ## ⚙️ Technical Architecture
+
+### System Workflow
 ```mermaid
-graph TB
-    A[User Submission] --> B[Telegram Bot]
-    B --> C[Smart Contract]
-    C --> D[AI Analysis Module]
-    D --> E[Community Voting]
-    E --> F[IPFS Storage]
-    F --> G[Verification NFT]
+graph TD
+    A[User Client] -->|Submit Proposal| B[Smart Contract]
+    B -->|Trigger ProposalSubmitted Event| C[AI Agent & Vote Node]
+    C -->|Call AI RAG Model| D[AI RAG Model]
+    D -->|Return Judgment Result| C
+    C -->|On-chain Voting & Generate Evidence| B
+    C -->|Store Voting Evidence & Get CID| H[Filecoin Network]
+    H -->|Return CID| C
+    C -->|Submit Evidence CID| B
+    B -->|Trigger Finalized Event| F[Off-chain Bot]
+    F -->|Response Result| G[Telegram Bot]
+    G -->|User Reply| A
+
+    classDef contract fill:#f9f,stroke:#333;
+    classDef agent fill:#ccf,stroke:#333;
+    classDef model fill:#9f9,stroke:#333;
+    classDef bot fill:#f96,stroke:#333;
+    classDef storage fill:#aaf,stroke:#333;
+    class B contract
+    class C agent
+    class D model
+    class G bot
+    class H storage
 ```
 
-**Core Components:**
-- **Smart Contracts:** Solidity (EVM-compatible: Filecoin, Ethereum, Polygon)  
-- **AI Modules:** Go + Python (RAG/LLM)  
-- **Storage:** IPFS/Filecoin  
-- **Frontend:** Telegram Bot + Web3 Dashboard  
+### Core Components
 
-## 🗳️ Governance Model
-Three-Layer Verification:
-1. **AI First Pass** (RAG analysis)  
-2. **Expert Review** (Subject matter delegates)  
-3. **Community Vote** (TVT token holders)  
+**1. Smart Contract Layer**
+- **Proposal Management:** Handles proposal submission and lifecycle
+- **Voting Mechanism:** Implements on-chain voting with time limits
+- **Result Finalization:** Records and triggers final verification events
+- **EVM Compatibility:** Deployable on Filecoin, Ethereum, Polygon
 
-## 📈 Roadmap
-| Quarter | Milestone |
-|---------|-----------|
-| Q2 2025 | MVP Launch (Filecoin, Ethereum, Polygon) |  
-| Q3 2025 | Cross-Chain Verification |  
-| Q4 2025 | Decentralized AI Training |  
-| Q1 2026 | DAO Governance Transition |  
+**2. AI Agent Layer**
+- **RAG Architecture:** Combines retrieval and generation for accurate analysis
+- **Multi-model Integration:** Leverages both specialized and general AI models
+- **Evidence Generation:** Creates verifiable proof for each judgment
+
+**3. Storage Layer**
+- **Decentralized Evidence:** All verification materials stored on IPFS/Filecoin
+- **Content Addressing:** Cryptographic proofs via CIDs
+- **Immutable Records:** Permanent storage of verification history
+
+**4. Interface Layer**
+- **Telegram Bot:** Primary user interaction channel
+- **Web3 Dashboard:** Advanced interface for power users
+- **API Gateway:** For system integration
+
+## 🗳️ Decentralized Governance Framework
+
+### Verification Process
+```mermaid
+graph TD
+    SubmitProposal[User Submits Proposal] --> StoreProposal[Store Proposal]
+    StoreProposal --> TriggerEvent[Trigger ProposalSubmitted Event]
+    TriggerEvent --> AI_Agent[AI Agent Analysis]
+    AI_Agent --> SubmitResult[Submit Judgment Result]
+    SubmitResult --> TriggerVoting[Trigger Voting Event]
+    TriggerVoting --> Vote[Community Voting]
+    Vote --> Finalize[Voting End Condition Judgment]
+    Finalize --> UpdateState[Update Proposal Status to Finalized]
+    UpdateState --> NotifyBot[Trigger Finalized Event]
+```
+
+### Governance Layers
+1. **Automated AI Verification**
+   - RAG-based information retrieval
+   - Multi-model consensus scoring
+   - Evidence-backed preliminary judgments
+
+2. **Community Voting**
+   - Token-weighted participation
+   - Time-bound voting periods
+   - Transparent vote tracking
+
+3. **Final Arbitration**
+   - Dispute resolution mechanism
+   - Expert panel review (for contested cases)
+   - Final on-chain recording
+
+### Incentive Structure
+- **Proposers:** Pay verification fees in TVT tokens
+- **Voters:** Earn rewards for participation
+- **Validators:** Staking rewards for accurate judgments
+
+## 📈 Technical Roadmap
+
+```mermaid
+gantt
+    title TruthValidator Development Timeline
+    dateFormat  YYYY-Q
+    section Core Protocol
+    Smart Contract Development   :2025-Q1, 2025-Q2
+    AI Agent Framework          :2025-Q1, 2025-Q3
+    Cross-chain Integration     :2025-Q2, 2025-Q4
+
+    section Ecosystem
+    Telegram Bot Implementation :2025-Q1, 2025-Q2
+    Web3 Dashboard              :2025-Q3, 2026-Q1
+    API Gateway                 :2025-Q4, 2026-Q2
+
+    section Governance
+    Tokenomics Design           :2025-Q1, 2025-Q2
+    DAO Framework               :2025-Q3, 2026-Q1
+    Dispute Resolution          :2026-Q1, 2026-Q3
+```
+
+### Key Milestones
+- **2025 Q2:** MVP Launch (Filecoin, Ethereum, Polygon)
+  - Basic verification workflow
+  - Telegram bot integration
+  - On-chain voting
+
+- **2025 Q4:** Cross-chain Expansion
+  - Multi-chain evidence storage
+  - Cross-chain vote aggregation
+  - Enhanced RAG models
+
+- **2026 Q1:** DAO Transition
+  - Full community governance
+  - Treasury management
+  - Protocol upgrades
+
+## 🔧 Technical Specifications
+
+### Smart Contract System
+```solidity
+// Core Proposal Structure
+struct Proposal {
+    address proposer;
+    string contentCID; // IPFS content hash
+    uint256 voteStart;
+    uint256 voteEnd;
+    uint256 yesVotes;
+    uint256 noVotes;
+    Status status;
+}
+
+// Key Functions
+function submitProposal(string calldata _contentCID) external;
+function vote(uint256 _proposalId, bool _support) external;
+function finalizeProposal(uint256 _proposalId) external;
+```
+
+### AI Agent Architecture
+```mermaid
+graph LR
+    Event[Proposal Event] --> Retriever[RAG Retriever]
+    Retriever --> VectorDB[Vector Database]
+    VectorDB --> Generator[LLM Generator]
+    Generator --> Judgement[Judgement Engine]
+    Judgement --> Contract[Smart Contract]
+```
+
+### Performance Metrics
+| Component | Target | Current |
+|-----------|--------|---------|
+| Verification Time | <5 min | 7.2 min |
+| Voting Period | 24h | 24h |
+| Storage Cost | $0.01/verification | $0.03 |
+| Throughput | 1000 verifications/day | 350 |
 
 ## 🌱 Join the Movement
 **For Developers:**

@@ -75,6 +75,28 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 * **Decentralized Governance:** Aligns with the system's philosophy of decentralization and community empowerment.
 * **Enhanced Security:** Protects against censorship and single-point failures.
 
+## 📈 Technical Roadmap
+
+```mermaid
+gantt
+    title TruthValidator Development Timeline
+    dateFormat  YYYY-MM-DD
+    axisFormat  %Y-Q%q
+    section Core Protocol
+    Smart Contract Development   :active, 2025-01-01, 2025-06-30
+    AI Agent Framework          :active, 2025-01-01, 2025-09-30
+    Cross-chain Integration     :2025-04-01, 2025-12-31
+
+    section Ecosystem
+    Telegram Bot Implementation :active, 2025-01-01, 2025-06-30
+    Web3 Dashboard              :2025-07-01, 2026-03-31
+    API Gateway                 :2025-10-01, 2026-06-30
+
+    section Governance
+    Tokenomics Design           :active, 2025-01-01, 2025-06-30
+    DAO Framework               :2025-07-01, 2026-03-31
+    Dispute Resolution          :2026-01-01, 2026-09-30
+```
 
 ## ✊ Join the Truth Revolution
 
@@ -88,6 +110,7 @@ This is more than code - it's the foundation for a new information age. We invit
 
 🔗 [Contribute on GitHub](https://github.com/TruthValidator)
 📜 [Read the Lightpaper](./docs/lightpaper.md)
+
 
 ## 📜 License
 TruthValidator is dual-licensed under:

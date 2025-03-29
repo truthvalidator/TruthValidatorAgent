@@ -1,2 +1,42 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Build artifacts
+bin/
+dist/
+build/
+
+# Environment files
+.env
+*.env
+
+# Documentation outputs
+docs/_build/
+docs/site/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Project specific ignores
 tgbot/docker-compose-dev.yml
 VerifyProposalAIAgent/docker-compose-dev.yml

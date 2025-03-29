@@ -87,4 +87,9 @@ This is more than code - it's the foundation for a new information age. We invit
 **The future of truth is decentralized. The future is open source. The future is ours to build.**
 
 🔗 [Contribute on GitHub](https://github.com/TruthValidator)
-📜 [Read the Lightpaper](./lightpaper.md)
+📜 [Read the Lightpaper](./docs/lightpaper.md)
+
+## 📜 License
+TruthValidator is dual-licensed under:
+- [Apache License 2.0](./LICENSE-APACHE)
+- [MIT License](./LICENSE-MIT)

@@ -64,7 +64,9 @@ Look for `good first issue` labels. We recommend starting with:
 - Small bug fixes
 
 ## 📜 License
-By contributing, you agree your work will be licensed under the project's GPL-3.0 license.
+By contributing, you agree your work will be dual-licensed under:
+- [Apache 2.0](../LICENSE-APACHE)
+- [MIT](../LICENSE-MIT)
 
 **Thank you for helping build decentralized truth verification!**
 

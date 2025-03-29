@@ -50,4 +50,6 @@ We welcome contributions to:
 🛡️ [Security Guidelines]()
 
 ## 📜 License
-GPL-3.0 - Because truth verification should remain free and open
+Dual-licensed under:
+- [Apache 2.0](../LICENSE-APACHE)
+- [MIT](../LICENSE-MIT)

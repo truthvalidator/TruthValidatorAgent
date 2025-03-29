@@ -46,4 +46,6 @@ We welcome contributions to advance decentralized truth verification:
 🔗 [Contribution Guidelines]()
 
 ## 📜 License
-Apache 2.0 - Because truth should be free and open
+Dual-licensed under:
+- [Apache 2.0](../LICENSE-APACHE) 
+- [MIT](../LICENSE-MIT)

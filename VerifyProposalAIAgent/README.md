@@ -29,7 +29,7 @@ graph LR
 ```
 
 **Core Components:**
-- **Solidity Smart Contracts:** TruthValidatorSentientNet.sol
+- **EVM-Compatible Smart Contracts:** TruthValidatorSentientNet.sol (deployable on Filecoin, Ethereum, Polygon)
 - **Golang AI Agent:** Integrates AI judgment with blockchain
 - **IPFS/Filecoin Bridge:** For evidence storage
 - **Telegram Bot Interface:** User interaction layer

@@ -2,7 +2,7 @@
 **Decentralized Truth Verification for the Information Age**  
 *Version 1.0 - March 2025*
 
-![TruthValidator Ecosystem](docs/imgs/arch_new.png)
+![TruthValidator Ecosystem](https://github.com/truthvalidator/TruthValidatorAgent/blob/main/docs/imgs/arch_new.png?raw=true)
 
 ## 🌐 Vision
 In a world drowning in misinformation, TruthValidator pioneers a decentralized protocol where:
@@ -46,7 +46,7 @@ graph TB
 ```
 
 **Core Components:**
-- **Smart Contracts:** Solidity (EVM chains)  
+- **Smart Contracts:** Solidity (EVM-compatible: Filecoin, Ethereum, Polygon)  
 - **AI Modules:** Go + Python (RAG/LLM)  
 - **Storage:** IPFS/Filecoin  
 - **Frontend:** Telegram Bot + Web3 Dashboard  
@@ -60,7 +60,7 @@ Three-Layer Verification:
 ## 📈 Roadmap
 | Quarter | Milestone |
 |---------|-----------|
-| Q2 2025 | MVP Launch (Ethereum + Polygon) |  
+| Q2 2025 | MVP Launch (Filecoin, Ethereum, Polygon) |  
 | Q3 2025 | Cross-Chain Verification |  
 | Q4 2025 | Decentralized AI Training |  
 | Q1 2026 | DAO Governance Transition |  

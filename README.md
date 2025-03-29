@@ -64,7 +64,7 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 
 * **AI:** RAG, LLM, Metasearch API
 * **Filecoin:** Decentralized storage for voting evidence(Filecoin lassie & Storacha)
-* **Blockchain:** EVM-compatible, Solidity
+* **Blockchain:** EVM-compatible chains (Filecoin, Ethereum, Polygon), Solidity smart contracts
 * **Telegram Bot API:** `telegram-bot` (Golang)
 
 ## Integration with Filecoin storage

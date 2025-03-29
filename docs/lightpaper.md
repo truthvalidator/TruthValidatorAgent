@@ -11,7 +11,7 @@ In a world drowning in misinformation, TruthValidator pioneers a decentralized p
 - **Information sovereignty belongs to the people**
 
 ## 🔍 Core Problem
-- 74% of internet users encounter misinformation weekly (Pew Research 2024)  
+- Internet users encounter misinformation weekly 
 - Centralized platforms control truth narratives  
 - AI-generated content makes verification exponentially harder  
 
@@ -128,21 +128,22 @@ graph TD
 ```mermaid
 gantt
     title TruthValidator Development Timeline
-    dateFormat  YYYY-Q
+    dateFormat  YYYY-MM-DD
+    axisFormat  %Y-Q%q
     section Core Protocol
-    Smart Contract Development   :2025-Q1, 2025-Q2
-    AI Agent Framework          :2025-Q1, 2025-Q3
-    Cross-chain Integration     :2025-Q2, 2025-Q4
+    Smart Contract Development   :active, 2025-01-01, 2025-06-30
+    AI Agent Framework          :active, 2025-01-01, 2025-09-30
+    Cross-chain Integration     :2025-04-01, 2025-12-31
 
     section Ecosystem
-    Telegram Bot Implementation :2025-Q1, 2025-Q2
-    Web3 Dashboard              :2025-Q3, 2026-Q1
-    API Gateway                 :2025-Q4, 2026-Q2
+    Telegram Bot Implementation :active, 2025-01-01, 2025-06-30
+    Web3 Dashboard              :2025-07-01, 2026-03-31
+    API Gateway                 :2025-10-01, 2026-06-30
 
     section Governance
-    Tokenomics Design           :2025-Q1, 2025-Q2
-    DAO Framework               :2025-Q3, 2026-Q1
-    Dispute Resolution          :2026-Q1, 2026-Q3
+    Tokenomics Design           :active, 2025-01-01, 2025-06-30
+    DAO Framework               :2025-07-01, 2026-03-31
+    Dispute Resolution          :2026-01-01, 2026-09-30
 ```
 
 ### Key Milestones

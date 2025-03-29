@@ -193,14 +193,6 @@ graph LR
     Judgement --> Contract[Smart Contract]
 ```
 
-### Performance Metrics
-| Component | Target | Current |
-|-----------|--------|---------|
-| Verification Time | <5 min | 7.2 min |
-| Voting Period | 24h | 24h |
-| Storage Cost | $0.01/verification | $0.03 |
-| Throughput | 1000 verifications/day | 350 |
-
 ## 🌱 Join the Movement
 **For Developers:**
 - Contribute to our [GitHub](https://github.com/TruthValidator)  

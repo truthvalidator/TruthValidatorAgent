@@ -1,3 +1,4 @@
+// AI Search Engine - Core module for IPFS-based AI search functionality
 module ssaisearch
 
 go 1.22
@@ -5,17 +6,29 @@ go 1.22
 toolchain go1.23.2
 
 require (
+	// GoX utilities for common operations
 	github.com/KevinZonda/GoX v0.0.15
+	// Gin web framework for API endpoints
 	github.com/gin-contrib/cors v1.7.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/ipfs/go-cid v0.4.1
-	github.com/ipfs/go-unixfsnode v1.9.2
-	github.com/ipld/go-car/v2 v2.14.2
-	github.com/ipld/go-codec-dagpb v1.6.0
-	github.com/ipld/go-ipld-prime v0.21.0
+
+	// IPFS core components for decentralized storage
+	github.com/ipfs/go-cid v0.4.1 // Content ID handling
+	github.com/ipfs/go-unixfsnode v1.9.2 // UnixFS data handling
+	github.com/ipld/go-car/v2 v2.14.2 // Content Addressable Archives
+	github.com/ipld/go-codec-dagpb v1.6.0 // Protocol Buffers codec
+	github.com/ipld/go-ipld-prime v0.21.0 // IPLD core interfaces
+
+	// Environment configuration
 	github.com/joho/godotenv v1.5.1
+
+	// Prompt management for LLM interactions
 	github.com/promptc/promptc-go v0.1.2
+
+	// OpenAI API client for LLM integration
 	github.com/sashabaranov/go-openai v1.22.0
+
+	// Database ORM for persistent storage
 	gorm.io/gorm v1.25.9
 )
 

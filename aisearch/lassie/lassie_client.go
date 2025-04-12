@@ -1,3 +1,12 @@
+// Package lassie provides a client for interacting with Lassie - an IPFS retrieval client.
+// Lassie specializes in fetching content from IPFS using various retrieval protocols.
+//
+// Key Features:
+// - Simple HTTP interface for IPFS content retrieval
+// - Built-in timeout handling
+// - Support for both raw data and JSON content
+//
+// See https://github.com/filecoin-project/lassie for more details.
 package lassie
 
 import (
@@ -7,23 +16,32 @@ import (
 	"time"
 )
 
-// LassieClient represents a Lassie client with its scheme, host, port and LassieClientURL details
+// DefaultTimeout specifies the maximum duration for HTTP requests to Lassie
+const DefaultTimeout = 20 * time.Second
+
+// LassieClient represents a client for interacting with a Lassie IPFS retrieval node.
+// It handles communication with the node and content retrieval operations.
 type LassieClient struct {
-	// Scheme is the protocol scheme (e.g. http, https) used for communication with the Lassie node
+	// Scheme is the protocol scheme (e.g. "http", "https") used for communication
 	scheme string
 
-	// Host is the hostname or IP address of the Lassie node
+	// Host is the hostname or IP address of the Lassie node (e.g. "localhost")
 	host string
 
-	// Port is the TCP port number used for communication with the Lassie node
+	// Port is the TCP port number used for communication (e.g. 8080)
 	port int
 
-	// LassieClientURL is the URL of the Lassie client
+	// LassieClientURL is the base URL for IPFS content retrieval
+	// Format: "{scheme}://{host}:{port}/ipfs"
 	LassieClientURL string
 }
 
-// NewLassieClient creates a new instance of LassieClient with the provided scheme, host, and port.
-// It also sets the LassieClientURL based on the provided scheme, host, and port.
+// NewLassieClient creates a new LassieClient instance configured to communicate
+// with a Lassie node at the specified location.
+//
+// Example:
+//   client := NewLassieClient("http", "localhost", 8080)
+//   data, err := client.GetDataFromCID("bafy...")
 func NewLassieClient(scheme string, host string, port int) *LassieClient {
 
 	return &LassieClient{
@@ -51,40 +69,46 @@ func (lassieC *LassieClient) GetURLFromCID(cid string) (cidUrl string, err error
 	return cidUrl, err
 }
 
-// GetDataFromCID retrieves the data associated with the given CID from the Lassie node.
-//
-// The function constructs an HTTP GET request to the LassieClientURL of the LassieClient with the provided CID appended.
-// It then sends the request and reads the response body into a byte slice.
+// GetDataFromCID retrieves IPFS content by its CID from the Lassie node.
+// The content is returned as raw bytes which can represent any IPFS content type.
 //
 // Parameters:
-//   - cid (string) - The content identifier (CID) of the data to retrieve.
+//   - cid: The content identifier (CID) of the data to retrieve (e.g. "bafy...")
 //
 // Returns:
-//   - data ([]byte) - The retrieved data from the Lassie node.
-//   - err (error) - An error if any occurs while constructing the request or reading the response.
-func (lassieC *LassieClient) GetDataFromCID(cid string) (data []byte, err error) {
+//   - []byte: The raw content data
+//   - error: Any error that occurred during retrieval, including:
+//     - Invalid CID format
+//     - Connection failures
+//     - Timeouts (after 20 seconds)
+//     - HTTP errors (non-200 status)
+func (lassieC *LassieClient) GetDataFromCID(cid string) ([]byte, error) {
 	cidUrl := fmt.Sprintf("%s/%s", lassieC.LassieClientURL, cid)
 
 	req, err := http.NewRequest("GET", cidUrl, nil)
-	req.Header.Set("Accept", "*/*")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
+	req.Header.Set("Accept", "*/*")
 
-	client := &http.Client{Timeout: time.Second * 20}
+	client := &http.Client{Timeout: DefaultTimeout}
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
-	data, err = io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected status %d retrieving CID %s", resp.StatusCode, cid)
 	}
 
-	return
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+
+	return data, nil
 }
 
 // GetJSONFromCID retrieves the JSON data associated with the given CID from the Lassie node.

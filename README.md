@@ -132,8 +132,8 @@ This is more than code - it's the foundation for a new information age. We invit
 
 **The future of truth is decentralized. The future is open source. The future is ours to build.**
 
-🔗 [Contribute on GitHub](https://github.com/TruthValidator)
-📜 [Read the Lightpaper](./docs/lightpaper.md)
+🔗 [Contribute on GitHub](https://github.com/truthvalidator/TruthValidatorAgent/blob/main/CONTRIBUTING.md)
+📜 [Read the Lightpaper](https://www.truthvalidator.xyz/lightpaper)
 
 
 ## 📜 License

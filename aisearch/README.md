@@ -35,11 +35,11 @@ graph TD
 
 ## 🤝 Contributing to Decentralized AI
 
-We welcome contributions to advance decentralized truth verification:
-- Improve search algorithms
-- Enhance RAG capabilities
-- Develop new evidence analysis models
-- Strengthen blockchain integration
+We welcome contributions in these areas:
+- Search algorithms
+- RAG enhancements
+- Evidence analysis models
+- Blockchain integration
 
 **Join us in building AI that serves truth, not power.**
 

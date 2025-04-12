@@ -1,130 +1,138 @@
-# TruthValidator Lightpaper  
-**Decentralized Truth Verification for the Information Age**  
-*Version 1.0 - March 2025*
+# **TruthValidator: 去中心化真相验证协议**  
+**基于AI、区块链与Filecoin的抗篡改信息验证网络**  
 
-![TruthValidator Ecosystem](https://github.com/truthvalidator/TruthValidatorAgent/blob/main/docs/imgs/arch_new.png?raw=true)
-
-## 🌐 Vision
-In a world drowning in misinformation, TruthValidator pioneers a decentralized protocol where:
-- **Truth is verified, not dictated**  
-- **AI serves humanity, not manipulates it**  
-- **Information sovereignty belongs to the people**
-
-## 🔍 Core Problem
-- Internet users encounter misinformation weekly 
-- Centralized platforms control truth narratives  
-- AI-generated content makes verification exponentially harder  
-
-## 💡 Our Solution
-A decentralized network combining:
-- **AI Agents** for unbiased analysis  
-- **Blockchain Consensus** for community verification  
-- **IPFS/Filecoin** for immutable evidence storage  
-
-### Key Innovations:
-1. **RAG-Powered AI Verification**  
-   - Retrieval-Augmented Generation analyzes claims against decentralized knowledge graphs  
-   - Transparent reasoning trails stored on-chain  
-
-2. **Token-Curated Truth**  
-   - TVT token holders vote on claim validity  
-   - Reputation-weighted quadratic voting prevents Sybil attacks  
-
-3. **Decentralized Evidence Storage**  
-   - All verification materials stored on IPFS/Filecoin  
-   - Content-addressed cryptographic proofs  
-
-## ⚙️ Technical Architecture
-
-### System Workflow
 ```mermaid
 graph TD
-    A[User Client] -->|Submit Proposal| B[Smart Contract]
-    B -->|Trigger ProposalSubmitted Event| C[AI Agent & Vote Node]
-    C -->|Call AI RAG Model| D[AI RAG Model]
-    D -->|Return Judgment Result| C
-    C -->|On-chain Voting & Generate Evidence| B
-    C -->|Store Voting Evidence & Get CID| H[Filecoin Network]
-    H -->|Return CID| C
-    C -->|Submit Evidence CID| B
-    B -->|Trigger Finalized Event| F[Off-chain Bot]
-    F -->|Response Result| G[Telegram Bot]
-    G -->|User Reply| A
-
-    classDef contract fill:#f9f,stroke:#333;
-    classDef agent fill:#ccf,stroke:#333;
-    classDef model fill:#9f9,stroke:#333;
-    classDef bot fill:#f96,stroke:#333;
-    classDef storage fill:#aaf,stroke:#333;
-    class B contract
-    class C agent
-    class D model
-    class G bot
-    class H storage
+    A[信息危机] --> B[TruthValidator]
+    B --> C[AI验证]
+    B --> D[社区共识] 
+    B --> E[永久存证]
+    C --> F[可信信息]
+    D --> F
+    E --> F
 ```
 
-### Core Components
+## **1. 摘要（Executive Summary）**
+TruthValidator 是Web3时代的信息验证基础设施，通过三重机制确保数字真相：
 
-**1. Smart Contract Layer**
-- **Proposal Management:** Handles proposal submission and lifecycle
-- **Voting Mechanism:** Implements on-chain voting with time limits
-- **Result Finalization:** Records and triggers final verification events
-- **EVM Compatibility:** Deployable on Filecoin, Ethereum, Polygon
+1. **智能分析** - RAG增强的AI验证引擎
+2. **集体智慧** - DAO驱动的社区投票
+3. **永久记录** - Filecoin存储的不可篡改证据
 
-**2. AI Agent Layer**
-- **RAG Architecture:** Combines retrieval and generation for accurate analysis
-- **Multi-model Integration:** Leverages both specialized and general AI models
-- **Evidence Generation:** Creates verifiable proof for each judgment
-
-**3. Storage Layer**
-- **Decentralized Evidence:** All verification materials stored on IPFS/Filecoin
-- **Content Addressing:** Cryptographic proofs via CIDs
-- **Immutable Records:** Permanent storage of verification history
-
-**4. Interface Layer**
-- **Telegram Bot:** Primary user interaction channel
-- **Web3 Dashboard:** Advanced interface for power users
-- **API Gateway:** For system integration
-
-## 🗳️ Decentralized Governance Framework
-
-### Verification Process
+## **2. 问题与现状**
+### **2.1 信息生态危机**
 ```mermaid
-graph TD
-    SubmitProposal[User Submits Proposal] --> StoreProposal[Store Proposal]
-    StoreProposal --> TriggerEvent[Trigger ProposalSubmitted Event]
-    TriggerEvent --> AI_Agent[AI Agent Analysis]
-    AI_Agent --> SubmitResult[Submit Judgment Result]
-    SubmitResult --> TriggerVoting[Trigger Voting Event]
-    TriggerVoting --> Vote[Community Voting]
-    Vote --> Finalize[Voting End Condition Judgment]
-    Finalize --> UpdateState[Update Proposal Status to Finalized]
-    UpdateState --> NotifyBot[Trigger Finalized Event]
+pie
+    title 虚假信息来源
+    "AI生成内容" : 45
+    "刻意误导" : 30
+    "无意错误" : 15
+    "其他" : 10
 ```
 
-### Governance Layers
-1. **Automated AI Verification**
-   - RAG-based information retrieval
-   - Multi-model consensus scoring
-   - Evidence-backed preliminary judgments
+### **2.2 传统方案缺陷**
+| 方案 | 问题 | 我们的改进 |
+|------|------|-----------|
+|人工审核|效率低、成本高|AI自动化验证|
+|中心化平台|单点控制风险|去中心化网络|
+|简单存证|缺乏分析|完整验证链|
 
-2. **Community Voting**
-   - Token-weighted participation
-   - Time-bound voting periods
-   - Transparent vote tracking
+## **3. 技术架构**
+### **3.1 系统概览**
+```mermaid
+flowchart TB
+    subgraph 输入层
+    A[用户提交]
+    end
 
-3. **Final Arbitration**
-   - Dispute resolution mechanism
-   - Expert panel review (for contested cases)
-   - Final on-chain recording
+    subgraph 处理层
+    B[AI分析]
+    C[社区投票]
+    end
 
-### Incentive Structure
-- **Proposers:** Pay verification fees in TVT tokens
-- **Voters:** Earn rewards for participation
-- **Validators:** Staking rewards for accurate judgments
+    subgraph 输出层
+    D[验证结果]
+    E[永久存证]
+    end
 
-## 📈 Technical Roadmap
+    A --> B --> C --> D
+    C --> E
+```
 
+### **3.2 核心创新**
+**1. AI验证引擎**
+```mermaid
+graph LR
+    S[搜索] --> R[检索]
+    R --> A[分析]
+    A --> V[验证]
+    V --> O[输出]
+```
+
+**2. 共识机制**
+```mermaid
+sequenceDiagram
+    用户->>合约: 提交提案
+    合约->>AI: 分析请求
+    AI->>合约: 返回结果
+    合约->>社区: 发起投票
+    社区->>合约: 投票结果
+```
+
+**3. 存储系统**
+```mermaid
+flowchart LR
+    数据 --> IPFS --> Filecoin --> 区块链
+```
+
+## **4. 技术实现**
+### **4.1 模块详解**
+**智能合约**
+```mermaid
+classDiagram
+    class TruthValidator {
+        +submitProposal()
+        +vote()
+        +finalize()
+    }
+```
+
+**AI工作流**
+```mermaid
+journey
+    title AI验证流程
+    section 检索
+      获取数据: 5
+    section 分析
+      处理内容: 4
+    section 验证
+      生成证据: 3
+```
+
+### **4.2 关键技术**
+- 多模态内容分析
+- 去中心化身份认证
+- 零知识证明隐私保护
+- 跨链互操作性
+
+## **5. 应用场景**
+### **5.1 典型用例**
+```mermaid
+mindmap
+  root((应用场景))
+    新闻验证
+      事实核查
+      来源追踪
+    学术诚信
+      论文验证
+      数据审计
+    电商防伪
+      商品认证
+      供应链追溯
+```
+
+## **6. 生态发展**
+### **6.1 路线图**
 ```mermaid
 gantt
     title TruthValidator Development Timeline
@@ -146,68 +154,27 @@ gantt
     Dispute Resolution          :2026-01-01, 2026-09-30
 ```
 
-### Key Milestones
-- **2025 Q2:** MVP Launch (Filecoin, Ethereum, Polygon)
-  - Basic verification workflow
-  - Telegram bot integration
-  - On-chain voting
-
-- **2025 Q4:** Cross-chain Expansion
-  - Multi-chain evidence storage
-  - Cross-chain vote aggregation
-  - Enhanced RAG models
-
-- **2026 Q1:** DAO Transition
-  - Full community governance
-  - Treasury management
-  - Protocol upgrades
-
-## 🔧 Technical Specifications
-
-### Smart Contract System
-```solidity
-// Core Proposal Structure
-struct Proposal {
-    address proposer;
-    string contentCID; // IPFS content hash
-    uint256 voteStart;
-    uint256 voteEnd;
-    uint256 yesVotes;
-    uint256 noVotes;
-    Status status;
-}
-
-// Key Functions
-function submitProposal(string calldata _contentCID) external;
-function vote(uint256 _proposalId, bool _support) external;
-function finalizeProposal(uint256 _proposalId) external;
-```
-
-### AI Agent Architecture
+## **7. 总结展望**
+**技术价值**
 ```mermaid
-graph LR
-    Event[Proposal Event] --> Retriever[RAG Retriever]
-    Retriever --> VectorDB[Vector Database]
-    VectorDB --> Generator[LLM Generator]
-    Generator --> Judgement[Judgement Engine]
-    Judgement --> Contract[Smart Contract]
+pie
+    title 技术贡献
+    "验证协议" : 40
+    "存储方案" : 30
+    "治理模型" : 20
+    "其他" : 10
 ```
 
-## 🌱 Join the Movement
-**For Developers:**
-- Contribute to our [GitHub](https://github.com/TruthValidator)  
-- Build verification plugins  
+**未来方向**
+- 多链验证网络
+- 增强隐私保护
+- 开放标准制定
 
-**For Researchers:**  
-- Improve our RAG models  
-- Study decentralized consensus mechanisms  
+> "构建信息可信互联网的基础协议"
 
-**For Everyone:**  
-- Run verification nodes  
-- Participate in truth mining  
+## **8. 参与方式**
+- 开发者: GitHub贡献
+- 研究者: 模型优化
+- 用户: 运行节点
 
-**The future of truth is decentralized.**  
-**The future is verifiable.**  
-**The future starts now.**  
-
-📄 [Full Whitepaper]() | 🤖 [Try Our Bot]() | 🌐 [Join Community]()
+[官网] | [文档] | [社区]

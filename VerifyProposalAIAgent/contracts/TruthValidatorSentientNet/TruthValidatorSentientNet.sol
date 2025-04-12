@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./ReentrancyGuard.sol";
+
 /**
  * @title TruthValidatorSentientNet
  * @notice A decentralized truth verification system where:
@@ -9,7 +11,7 @@ pragma solidity ^0.8.0;
  * - AI agents can participate as voters
  * - Results are transparently recorded on-chain
  */
-contract TruthValidatorSentientNet {
+contract TruthValidatorSentientNet is ReentrancyGuard {
     /// @notice Proposal structure capturing all details of a truth claim
     /// @dev Stored in proposals mapping by proposalId
     struct Proposal {
@@ -67,6 +69,7 @@ contract TruthValidatorSentientNet {
     /// @param _content The factual claim being submitted for community validation
     /// @dev Emits ProposalSubmitted event on success
     function submitProposal(string memory _content) external {
+        require(bytes(_content).length > 0 && bytes(_content).length <= 280, "Invalid content length");
         uint256 proposalId = proposalCounter++; // Generate a new proposal ID
         proposals[proposalId] = Proposal({
             id: proposalId,
@@ -85,7 +88,8 @@ contract TruthValidatorSentientNet {
     /// @param _isApproved True if vote validates the claim
     /// @param _reason Detailed justification for the vote
     /// @dev Emits VoteCast event and may trigger finalization
-    function vote(uint256 _proposalId, bool _isApproved, string memory _reason) external {
+    function vote(uint256 _proposalId, bool _isApproved, string memory _reason) external nonReentrant {
+        require(gasleft() > 100000, "Insufficient gas for vote");
         Proposal storage p = proposals[_proposalId]; // Get the proposal
         require(!p.isFinalized, "Proposal is finalized"); // Ensure the proposal is not already finalized
         require(voterVotes[_proposalId][msg.sender].voter == address(0), "Already voted"); // Check if the voter has already voted
@@ -164,5 +168,10 @@ contract TruthValidatorSentientNet {
     function setVoteThreshold(uint256 _newThreshold) external onlyAdmin {
         require(_newThreshold > 0, "TruthValidator: threshold must be >0");
         voteThreshold = _newThreshold;
+        emit VoteThresholdChanged(_newThreshold);
     }
+
+    /// @notice Emitted when admin changes the vote threshold
+    /// @param newThreshold The new vote threshold value
+    event VoteThresholdChanged(uint256 newThreshold);
 }

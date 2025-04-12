@@ -15,10 +15,16 @@ const (
 )
 
 var (
-	// RootCmd is the root command for the TruthValidatorSentientNet application.
+	// RootCmd is the vibrant heart of TruthValidatorSentientNet - your gateway to decentralized AI governance.
+	// It orchestrates all subcommands to verify, vote on, and manage AI proposals in a trustless environment.
 	RootCmd = &cobra.Command{
 		Use:   "TruthValidatorSentientNet",
-		Short: "SovereignAISearch empowers users with complete control over AI search results, ensuring decentralized storage and privacy.",
+		Short: "🚀 SovereignAISearch - Take control of AI truth verification in a decentralized network",
+		Long: `A next-gen tool for decentralized AI governance that lets you:
+- Verify AI proposal authenticity
+- Vote on proposal validity
+- Manage decentralized AI search results
+- Ensure tamper-proof storage and privacy`,
 	}
 )
 
@@ -27,14 +33,21 @@ func init() {
 	RootCmd.PersistentFlags().String(NetworkFlag, "eth-localnet", "Name of the network to connect to")
 }
 
-// ExitWithError terminates the program after writing the error to stderr.
+// ExitWithError provides a friendly yet firm goodbye when things go wrong.
+// It prints a clear error message to stderr before exiting with status 1.
+// Example:
+//   ExitWithError("Network connection failed", err)
 func ExitWithError(msg string, err error) {
 	fmt.Fprintf(os.Stderr, "ERROR: %s: %v\n", msg, err)
 	os.Exit(1)
 }
 
-// GetNetworkAddress returns the dial address of the network specified via the
-// network flag. If the network is unknown, it exits with an error.
+// GetNetworkAddress is your network navigator - it translates human-friendly network names
+// into actual connection endpoints. Supports:
+// - Sapphire mainnet/testnet
+// - Ethereum localnet
+// - Sepolia testnet
+// Returns the dial address or exits gracefully if network is unknown.
 func GetNetworkAddress() string {
 	networks := map[string]string{
 		"sapphire":          "https://sapphire.oasis.io",
@@ -96,8 +109,11 @@ func GetNetworkAddress() string {
 	return addr
 }
 
-// ParseAddress converts the hex representation of an Ethereum address into
-// common.Address. It returns an error if the address is malformed.
+// ParseAddress is your Ethereum address validator - it takes a hex string and
+// converts it to a proper common.Address. Handles both 0x-prefixed and raw hex.
+// Returns error if address format is invalid (not 40 chars after 0x removal).
+// Example:
+//   addr, err := ParseAddress("0x123...abc")
 func ParseAddress(addrHex string) (common.Address, error) {
 	if strings.HasPrefix(addrHex, "0x") {
 		addrHex = strings.TrimPrefix(addrHex, "0x")
@@ -110,7 +126,11 @@ func ParseAddress(addrHex string) (common.Address, error) {
 	return common.HexToAddress(addrHex), nil
 }
 
-// Execute runs the root command and handles any errors.
+// Execute brings TruthValidatorSentientNet to life! It:
+// 1. Parses command line arguments
+// 2. Routes to appropriate subcommands
+// 3. Handles errors gracefully
+// This is the main entry point that makes the magic happen.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
 		ExitWithError("TruthValidatorSentientNet", err)

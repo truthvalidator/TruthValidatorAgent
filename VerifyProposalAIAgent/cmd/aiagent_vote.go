@@ -19,16 +19,30 @@ import (
 	"github.com/truthvalidator/TruthValidatorAgent/VerifyProposalAIAgent/contracts/TruthValidatorSentientNet"
 )
 
-// aigentListenAndVoteCmd represents the command to listen and vote on proposals
+// aigentListenAndVoteCmd is your AI-powered governance assistant that:
+// - Vigilantly monitors the blockchain for new proposals
+// - Analyzes each proposal with cutting-edge AI
+// - Casts votes with transparent reasoning
 var aigentListenAndVoteCmd = &cobra.Command{
 	Use:   "aigent_listenAndVote [contract_address]",
-	Short: "Listen for ProposalSubmitted events and automatically vote using AI analysis",
-	Long: `This command continuously listens for new proposals on the TruthValidator contract.
-When a new proposal is detected, it uses AI analysis to determine the vote decision
-and automatically submits the vote with reasoning.
+	Short: "🤖 AI Guardian - Automatically analyze and vote on proposals",
+	Long: `Your decentralized AI governance companion that:
+
+🔍 Watches for new proposals 24/7
+🧠 Analyzes content using advanced AI models
+✍️ Votes with clear, auditable reasoning
+🔄 Automatically reconnects if interrupted
+
+Features:
+- Real-time proposal monitoring
+- AI-powered truth verification
+- Transparent voting decisions
+- Resilient network handling
 
 Example:
   ./TruthValidatorAgent aigent_listenAndVote 0x123...abc
+
+Pro Tip: Set AI_DECISION_URL to your preferred AI endpoint
 `,
 	Args: cobra.ExactArgs(1),
 	Run:  aigentListenAndVote,
@@ -38,14 +52,15 @@ func init() {
 	RootCmd.AddCommand(aigentListenAndVoteCmd)
 }
 
-// aigentListenAndVote implements the core proposal listening and voting logic
-// Workflow:
-// 1. Establishes blockchain connection
-// 2. Subscribes to ProposalSubmitted events
-// 3. For each proposal:
-//    - Calls AI service for analysis
-//    - Submits vote with reasoning
-// 4. Handles reconnections and errors
+// aigentListenAndVote is the brain of your AI governance agent - it:
+// 1. 🌐 Connects to the blockchain (with automatic retries)
+// 2. 👂 Listens for new proposals (never misses an event)
+// 3. 🤖 Analyzes each proposal with AI (critical thinking)
+// 4. ✍️ Votes with clear reasoning (transparent decisions)
+// 5. 🔄 Automatically recovers from errors (resilient by design)
+// 
+// This function runs indefinitely, maintaining a persistent watch
+// over the contract and ensuring all proposals get fair AI review.
 func aigentListenAndVote(cmd *cobra.Command, args []string) {
 	contractAddr, err := ParseAddress(args[0])
 	if err != nil {
@@ -146,13 +161,20 @@ func aigentListenAndVote(cmd *cobra.Command, args []string) {
 	}
 }
 
-// AIResponse represents the structured response from the AI analysis service
+// AIResponse captures your AI's thoughtful verdict on each proposal.
+// Contains:
+// - Judge: The AI's true/false decision (true = approve)
+// - Reason: The AI's detailed justification (human-readable)
 type AIResponse struct {
 	Judge  bool   `json:"judge"`
 	Reason string `json:"reason"`
 }
 
-// decideVote calls the AI API to make a decision based on the proposal content
+// decideVote consults your AI oracle to:
+// - Thoroughly analyze proposal content
+// - Determine truthfulness and validity
+// - Provide clear reasoning for the decision
+// Returns structured AIResponse or error if analysis fails
 func decideVote(ctx context.Context, content string) (*AIResponse, error) {
 	log.Println("Calling AI API for decision on content:", content)
 
@@ -198,13 +220,13 @@ func trimMarkdownJSON(input string) string {
 	return trimmed
 }
 
-// callAISearchAPIForDecision invokes the AI decision API with the proposal content
-// Args:
-//   ctx: Context for request cancellation/timeout
-//   question: Proposal content to analyze
-// Returns:
-//   *http.Response: API response
-//   error: Any error that occurred
+// callAISearchAPIForDecision is your bridge to AI wisdom - it:
+// 1. Packages the proposal content for analysis
+// 2. Calls your configured AI endpoint (AI_DECISION_URL)
+// 3. Handles errors gracefully
+// 4. Returns the raw API response for processing
+// 
+// Note: Ensure AI_DECISION_URL points to a trusted AI service
 func callAISearchAPIForDecision(ctx context.Context, question string) (*http.Response, error) {
 	log.Println("callAISearchAPIForDecision question:", question)
 	url := os.Getenv("AI_DECISION_URL") // Use a different env var for decision API URL, or reuse AI_SEARCH_URL if it's the same API endpoint
@@ -243,7 +265,9 @@ func callAISearchAPIForDecision(ctx context.Context, question string) (*http.Res
 	return resp, nil
 }
 
-// generateVoteReason generates a reason for the vote based on the AI response
+// generateVoteReason crafts a human-friendly justification for votes.
+// While the AI provides detailed reasoning, this function ensures
+// a consistent format is always available as fallback.
 func generateVoteReason(content string, isApproved bool) string {
 	// This function is kept for backward compatibility, but ideally, the reason should come from the AI response directly.
 	if isApproved {

@@ -1,46 +1,71 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/**
+ * @title TruthValidatorSentientNet
+ * @notice A decentralized truth verification system where:
+ * - Participants submit proposals about facts/claims
+ * - Community members vote on proposal validity
+ * - AI agents can participate as voters
+ * - Results are transparently recorded on-chain
+ */
 contract TruthValidatorSentientNet {
-    // Struct to store proposal details
+    /// @notice Proposal structure capturing all details of a truth claim
+    /// @dev Stored in proposals mapping by proposalId
     struct Proposal {
-        uint256 id;          // Unique ID of the proposal
-        string content;      // Content of the proposal
-        uint256 yesVotes;    // Number of "yes" votes
-        uint256 noVotes;     // Number of "no" votes
-        bool isFinalized;    // Whether the proposal is finalized
+        uint256 id;          /// @notice Auto-incrementing unique proposal ID
+        string content;      /// @notice The actual claim/content being verified
+        uint256 yesVotes;    /// @notice Count of validating votes
+        uint256 noVotes;     /// @notice Count of invalidating votes
+        bool isFinalized;    /// @notice Flag indicating final voting status
     }
 
-    // Struct to store vote details
+    /// @notice Vote structure capturing individual voting decisions
+    /// @dev Stored in voterVotes nested mapping (proposalId => voter => Vote)
     struct Vote {
-        address voter;       // Address of the voter
-        bool isApproved;     // Whether the vote is in favor (true) or against (false)
-        string reason;       // Reason provided for the vote
+        address voter;       /// @notice Voter's Ethereum address
+        bool isApproved;     /// @notice True if vote validates the claim
+        string reason;       /// @notice Justification for the vote decision
     }
 
-    address public admin;                              // Admin address with special privileges
-    uint256 public proposalCounter;                   // Counter to generate unique proposal IDs
-    mapping(uint256 => Proposal) public proposals;    // Mapping of proposal IDs to Proposal structs
-    mapping(uint256 => mapping(address => Vote)) public voterVotes;  // Mapping of proposal IDs to voter addresses to Vote structs (replaces Vote array)
-    uint256 public voteThreshold = 3;                  // Minimum number of votes required to finalize a proposal
+    address public admin;                              /// @notice Privileged address for admin functions
+    uint256 public proposalCounter;                   /// @notice Auto-incrementing counter for proposal IDs
+    mapping(uint256 => Proposal) public proposals;    /// @notice Lookup of all proposals by ID
+    mapping(uint256 => mapping(address => Vote)) public voterVotes;  /// @notice Nested vote tracking (proposalId => voter => vote)
+    uint256 public voteThreshold = 3;                  /// @notice Minimum votes needed to finalize a proposal
 
-    // Events
-    event ProposalSubmitted(uint256 indexed proposalId, string content); // Emitted when a proposal is submitted
-    event VoteCast(uint256 indexed proposalId, address voter, bool isApproved, string reason); // Emitted when a vote is cast
-    event ProposalFinalized(uint256 indexed proposalId, bool finalResult, Vote[] voterResults); // Emitted when a proposal is finalized, including all voter results
+    /// @notice Emitted when a new truth claim is submitted
+    /// @param proposalId The unique ID assigned to this proposal
+    /// @param content The actual claim/content being verified
+    event ProposalSubmitted(uint256 indexed proposalId, string content);
 
-    // Modifier to restrict access to the admin
+    /// @notice Emitted when a participant votes on a proposal
+    /// @param proposalId The proposal being voted on
+    /// @param voter The address casting the vote
+    /// @param isApproved True if vote validates the claim
+    /// @param reason Justification for the vote decision
+    event VoteCast(uint256 indexed proposalId, address voter, bool isApproved, string reason);
+
+    /// @notice Emitted when a proposal reaches vote threshold and is finalized
+    /// @param proposalId The finalized proposal ID
+    /// @param finalResult True if majority validated the claim
+    /// @param voterResults Array of all votes cast on this proposal
+    event ProposalFinalized(uint256 indexed proposalId, bool finalResult, Vote[] voterResults);
+
+    /// @notice Restricts function access to only the admin
     modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin can call this function");
+        require(msg.sender == admin, "TruthValidator: caller is not admin");
         _;
     }
 
-    // Constructor to set the admin as the contract deployer
+    /// @notice Initializes contract with deployer as admin
     constructor() {
         admin = msg.sender;
     }
 
-    // Function to submit a new proposal
+    /// @notice Allows anyone to submit a new truth claim for verification
+    /// @param _content The factual claim being submitted for community validation
+    /// @dev Emits ProposalSubmitted event on success
     function submitProposal(string memory _content) external {
         uint256 proposalId = proposalCounter++; // Generate a new proposal ID
         proposals[proposalId] = Proposal({
@@ -53,9 +78,13 @@ contract TruthValidatorSentientNet {
         emit ProposalSubmitted(proposalId, _content); // Emit the ProposalSubmitted event
     }
 
-    mapping(uint256 => address[]) public proposalVoters;  // Mapping of proposal IDs to array of voter addresses
+    mapping(uint256 => address[]) public proposalVoters;  /// @notice Tracks all voters per proposal
 
-    // Function to cast a vote on a proposal
+    /// @notice Casts a vote on a proposal with justification
+    /// @param _proposalId The proposal being voted on
+    /// @param _isApproved True if vote validates the claim
+    /// @param _reason Detailed justification for the vote
+    /// @dev Emits VoteCast event and may trigger finalization
     function vote(uint256 _proposalId, bool _isApproved, string memory _reason) external {
         Proposal storage p = proposals[_proposalId]; // Get the proposal
         require(!p.isFinalized, "Proposal is finalized"); // Ensure the proposal is not already finalized
@@ -86,7 +115,9 @@ contract TruthValidatorSentientNet {
         }
     }
 
-    // Internal function to finalize a proposal
+    /// @notice Internal function that finalizes a proposal when threshold reached
+    /// @param _proposalId The proposal to finalize
+    /// @dev Called automatically when vote threshold met
     function _finalizeProposal(uint256 _proposalId) internal {
         Proposal storage p = proposals[_proposalId];
         require(!p.isFinalized, "Proposal is already finalized");  // Ensure the proposal isn't already finalized
@@ -104,23 +135,34 @@ contract TruthValidatorSentientNet {
         emit ProposalFinalized(_proposalId, finalResult, voterResults); // Emit the ProposalFinalized event with voter results
     }
 
-    // Function to retrieve a voter's vote for a specific proposal
+    /// @notice Retrieves a specific vote from a voter on a proposal
+    /// @param _proposalId The proposal to query
+    /// @param _voter The voter's address
+    /// @return Vote The voter's decision and reasoning
     function getVote(uint256 _proposalId, address _voter) external view returns (Vote memory) {
         return voterVotes[_proposalId][_voter];
     }
 
+    /// @notice Gets all voters who participated in a proposal
+    /// @param _proposalId The proposal to query
+    /// @return address[] Array of voter addresses
     function getVoters(uint256 _proposalId) external view returns (address[] memory) {
         return proposalVoters[_proposalId];
     }
 
-    // Function to retrieve vote counts for a specific proposal
+    /// @notice Gets the current vote tally for a proposal
+    /// @param _proposalId The proposal to query
+    /// @return yesVotes Count of validating votes
+    /// @return noVotes Count of invalidating votes
     function getVoteCounts(uint256 _proposalId) external view returns (uint256 yesVotes, uint256 noVotes) {
         return (proposals[_proposalId].yesVotes, proposals[_proposalId].noVotes);
     }
 
-    // Function to set the vote threshold (only callable by the admin)
+    /// @notice Admin function to update the vote threshold
+    /// @param _newThreshold New minimum votes required (must be >0)
+    /// @dev Only callable by admin
     function setVoteThreshold(uint256 _newThreshold) external onlyAdmin {
-        require(_newThreshold > 0, "Threshold must be greater than 0");
+        require(_newThreshold > 0, "TruthValidator: threshold must be >0");
         voteThreshold = _newThreshold;
     }
 }

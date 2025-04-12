@@ -1,3 +1,24 @@
+// Package connection provides Ethereum network connectivity and transaction utilities
+//
+// This package handles:
+// - Establishing secure connections to Ethereum networks
+// - Managing cryptographic keys and wallet addresses
+// - Preparing transactions with proper gas estimation
+// - Network-specific configurations
+//
+// Example usage:
+//   conn, err := connection.NewConnection(context.Background(), "https://mainnet.infura.io/v3/YOUR-PROJECT-ID")
+//   if err != nil {
+//       log.Fatal(err)
+//   }
+//   
+//   txOpts, err := conn.PrepareNextTx(context.Background())
+//   if err != nil {
+//       log.Fatal(err)
+//   }
+//
+// Version: 1.2.0
+// Author: TruthValidator Team
 package connection
 
 import (
@@ -14,25 +35,53 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-// Connection represents a connection to the network via our account.
+// Connection represents a secure connection to an Ethereum network
+// with wallet and transaction capabilities.
 type Connection struct {
-	// Client is an instance of the Go Ethereum client.
+	// Client is the Go Ethereum client instance used for RPC calls.
+	// Handles all network communication including:
+	// - Querying blockchain state
+	// - Submitting transactions
+	// - Event subscription
 	Client *ethclient.Client
 
-	// ChainID is the network ID of the network that we're connected to.
+	// ChainID identifies the Ethereum network (1=Mainnet, 5=Goerli, etc.)
+	// Used for EIP-155 transaction replay protection
 	ChainID *big.Int
 
-	// PrivateKey is our private key (loaded from the env var PRIVATE_KEY).
+	// PrivateKey is the ECDSA private key loaded from PRIVATE_KEY env var.
+	// WARNING: Ensure proper key management in production environments.
 	PrivateKey *ecdsa.PrivateKey
 
-	// PublicKey is our public key (derived from PrivateKey).
+	// PublicKey is derived from PrivateKey using secp256k1 curve.
+	// Used for address generation and signature verification.
 	PublicKey *ecdsa.PublicKey
 
-	// Address is our wallet's address (derived from PublicKey).
+	// Address is the Ethereum wallet address derived from PublicKey.
+	// Format: 0x followed by 20-byte hex string (40 characters)
 	Address common.Address
 }
 
-// NewConnection creates a new Connection to the given address.
+// NewConnection establishes a new Ethereum network connection
+//
+// Parameters:
+//   ctx - Context for cancellation and timeouts
+//   where - Network RPC endpoint URL (e.g. "https://mainnet.infura.io")
+//
+// Returns:
+//   *Connection - Configured connection instance
+//   error - Any initialization error
+//
+// Example:
+//   conn, err := NewConnection(context.Background(), "https://ropsten.infura.io/v3/YOUR-PROJECT-ID")
+//   if err != nil {
+//       return nil, fmt.Errorf("connection failed: %v", err)
+//   }
+//
+// Notes:
+// - Requires PRIVATE_KEY environment variable set
+// - Automatically handles 0x prefix in private key
+// - Validates network connectivity during initialization
 func NewConnection(ctx context.Context, where string) (*Connection, error) {
 	var (
 		c   Connection
@@ -81,7 +130,31 @@ func NewConnection(ctx context.Context, where string) (*Connection, error) {
 	return &c, nil
 }
 
-// PrepareNextTx returns a transactor for the next transaction.
+// PrepareNextTx prepares transaction options for the next outgoing transaction
+//
+// Handles:
+// - Nonce management (auto-incrementing)
+// - Gas price estimation (network suggested)
+// - Gas limit setting (fixed at 30M gas)
+// - Signer configuration
+//
+// Parameters:
+//   ctx - Context for cancellation and timeouts
+//
+// Returns:
+//   *bind.TransactOpts - Configured transaction options
+//   error - Any preparation error
+//
+// Example:
+//   txOpts, err := conn.PrepareNextTx(context.Background())
+//   if err != nil {
+//       return nil, fmt.Errorf("tx preparation failed: %v", err)
+//   }
+//   tx, err := contract.Method(txOpts, args...)
+//
+// Notes:
+// - Gas limit may need adjustment for complex contracts
+// - For EIP-1559 transactions, use SuggestGasPrice with type 2 transactions
 func (c *Connection) PrepareNextTx(ctx context.Context) (*bind.TransactOpts, error) {
 	nonce, err := c.Client.PendingNonceAt(ctx, c.Address) // Use c.Client directly
 	if err != nil {

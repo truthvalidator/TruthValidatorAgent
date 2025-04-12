@@ -10,13 +10,13 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 )
 
-// Wallet 封装以太坊钱包操作
+// Wallet encapsulates Ethereum wallet operations
 type Wallet struct {
 	privateKey *ecdsa.PrivateKey
 	address    common.Address
 }
 
-// NewWalletFromPrivateKey 从私钥创建钱包
+// NewWalletFromPrivateKey creates a wallet from a private key
 func NewWalletFromPrivateKey(privateKeyHex string) (*Wallet, error) {
 	privateKey, err := crypto.HexToECDSA(privateKeyHex)
 	if err != nil {
@@ -37,12 +37,12 @@ func NewWalletFromPrivateKey(privateKeyHex string) (*Wallet, error) {
 	}, nil
 }
 
-// GetAddress 获取钱包地址
+// GetAddress gets the wallet address
 func (w *Wallet) GetAddress() common.Address {
 	return w.address
 }
 
-// NewTransactor 创建交易签名者
+// NewTransactor creates a transaction signer
 func (w *Wallet) NewTransactor(chainID *big.Int) (*bind.TransactOpts, error) {
 	return bind.NewKeyedTransactorWithChainID(w.privateKey, chainID)
 }

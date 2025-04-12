@@ -5,7 +5,11 @@ import (
 	"ssaisearch/rag/searxng"
 )
 
-// ConvertSearxNGResultsToSERPResults converts []searxng.SpiderResult to []serp.SpiderResult
+// ConvertSearxNGResultsToSERPResults converts search results from SearxNG format to RAG format
+// Args:
+//   searxngResults: Raw search results from SearxNG metasearch engine
+// Returns:
+//   []rag.SpiderResult: Converted results in RAG-compatible format
 func ConvertSearxNGResultsToSERPResults(searxngResults []searxng.SpiderResult) []rag.SpiderResult {
 	serpResults := make([]rag.SpiderResult, len(searxngResults))
 	for i, result := range searxngResults {
@@ -20,7 +24,11 @@ func ConvertSearxNGResultsToSERPResults(searxngResults []searxng.SpiderResult) [
 	return serpResults
 }
 
-// ConvertSearxNGRawItemToRagRawItem converts searxng.SearchRawItem to rag.SearchRawItem
+// ConvertSearxNGRawItemToRagRawItem converts complete search response from SearxNG to RAG format
+// Args:
+//   searxngRaw: Complete raw search response from SearxNG
+// Returns:
+//   rag.SearchRawItem: Converted results including both search items and related queries
 func ConvertSearxNGRawItemToRagRawItem(searxngRaw searxng.SearchRawItem) rag.SearchRawItem {
 	return rag.SearchRawItem{
 		SpiderResults: ConvertSearxNGResultsToSERPResults(searxngRaw.SpiderResults),
@@ -33,11 +41,15 @@ type ProgramGuide struct {
 	Guide           string `json:"guide"`
 }
 
-func GenerateProgramGuideStr(progLang string) (string, error) {
-
-	if progLang != "" {
-		return progLang + ",Ensure to append the cited links at the end of your response.", nil
+// GenerateProgramGuideStr creates language-specific guidance for LLM responses
+// Args:
+//   programmingLanguage: Target programming language (e.g. "golang")
+// Returns:
+//   string: Formatted guidance string for LLM prompt
+//   error: Always nil in current implementation
+func GenerateProgramGuideStr(programmingLanguage string) (string, error) {
+	if programmingLanguage != "" {
+		return programmingLanguage + ",Ensure to append the cited links at the end of your response.", nil
 	}
-
 	return "Ensure to append the cited links at the end of your response.", nil
 }

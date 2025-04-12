@@ -9,34 +9,39 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// QueryCIDHandler handles the GET request to retrieve and return the JSON content of a CID.
+// QueryCIDHandler handles CID-based content retrieval from IPFS network
+// Workflow:
+// 1. Extracts CID from request path
+// 2. Initializes IPFS client connection
+// 3. Fetches JSON data from IPFS using the CID
+// 4. Returns raw JSON response or appropriate error
 func QueryCIDHandler(c *gin.Context) {
-	// Extract the CID from the path parameter.
+	// Get CID parameter from URL path
 	cid := c.Param("cid")
 	if cid == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "CID parameter is required"})
 		return
 	}
 
-	// Create a new IPFS client.
+	// Initialize IPFS client with default local node configuration
 	ipfsC := lassie.NewLassieClient("http",
 		"127.0.0.1",
 		62156)
 
-	// Retrieve the data from the CID.
-	D, err := lassie.GetJSONDATAFromCID(ipfsC, cid)
+	// Fetch JSON data from IPFS network using the CID
+	jsonData, err := lassie.GetJSONDATAFromCID(ipfsC, cid)
 	if err != nil {
 		log.Panicln(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data from CID"})
 		return
 	}
 
-	// Assuming the first file in D is the JSON content we want to return.
-	if len(D) == 0 {
+	// Verify we received valid JSON data
+	if len(jsonData) == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "No files found in the CID"})
 		return
 	}
 
-	// Return the raw JSON data.
-	c.Data(http.StatusOK, "application/json", []byte(D))
+	// Stream the raw JSON response back to client
+	c.Data(http.StatusOK, "application/json", []byte(jsonData))
 }

@@ -24,8 +24,14 @@ import (
 	"github.com/sashabaranov/go-openai"
 )
 
+// VerifyProposal handles the core truth verification workflow:
+// 1. Parses and validates the incoming query
+// 2. Searches for evidence using SearxNG metasearch 
+// 3. Analyzes results with LLM to generate judgment
+// 4. Stores verification evidence on Web3 storage
+// 5. Streams response back to client
 func VerifyProposal(c *gin.Context) {
-	var query reqmodel.Query
+	var query reqmodel.Query // Incoming verification request
 	if err := c.BindJSON(&query); err != nil {
 		utils.GinErrorMsg(c, err)
 		return
@@ -40,21 +46,23 @@ func VerifyProposal(c *gin.Context) {
 		Question: query.Question,
 	}
 
-	searched := ""
+	searchResultsText := "" // Aggregated text from decentralized search results
 
-	// Create a SearxNGConfig instance
+	// Configure decentralized search via SearxNG metasearch engine
 	config := searxng.SearxNGConfig{
-		Endpoint: "http://127.0.0.1:18080/search", // Replace with your actual endpoint
+		Endpoint: "http://127.0.0.1:18080/search", // SearxNG instance endpoint
 	}
 
 	queryStr := query.Question
 
+	// Execute decentralized search and process results
 	searchRaw, err := searxng.SearchRawFromSearxNG(config, query.Country(), query.Locale(), queryStr)
 	if err != nil {
 		log.Println("SearchRawFromSearxNG error:", err)
 	} else {
+		// Convert and aggregate search results for LLM analysis
 		serpResults := ConvertSearxNGResultsToSERPResults(searchRaw.SpiderResults)
-		searched = rag.SearchResultsToText(serpResults)
+		searchResultsText = rag.SearchResultsToText(serpResults)
 	}
 
 	ragRaw := ConvertSearxNGRawItemToRagRawItem(searchRaw)
@@ -73,8 +81,10 @@ func VerifyProposal(c *gin.Context) {
 		guideStr = str
 	}
 
-	content := llm.Promptc(query.Language, query.Field, query.Question, guideStr, searched)
+	// Prepare LLM prompt with search results and execute AI analysis
+	content := llm.Promptc(query.Language, query.Field, query.Question, guideStr, searchResultsText)
 
+	// Configure LLM request with system prompts and user query
 	req := utils.ModelGPT35Request([]openai.ChatCompletionMessage{
 		utils.ChatMsgFromSystem(content),
 		utils.ChatMsgFromSystem(`{
@@ -90,9 +100,8 @@ func VerifyProposal(c *gin.Context) {
 	ans.FirstAnswer = chatStreamToGin(c, req)
 	ans.IsOk = true
 
-	//store ai search infos to web3 storage
-
-	// create json from data
+	// Store verification evidence on decentralized Web3 storage
+	// Prepare JSON data containing question, AI analysis and search evidence
 	data := map[string]interface{}{
 		"Question":    query.Question,
 		"FirstAnswer": ans.FirstAnswer,
@@ -141,8 +150,12 @@ func VerifyProposal(c *gin.Context) {
 
 }
 
+// extractUploadURL extracts the Filecoin/IPFS upload URL from w3 CLI output
+// Args:
+//   output: Raw output string from w3 up command
+// Returns:
+//   The extracted upload URL or empty string if not found
 func extractUploadURL(output string) string {
-	// 使用正则表达式匹配链接地址
 	re := regexp.MustCompile(`https://w3s\.link/ipfs/[a-zA-Z0-9]+`)
 	matches := re.FindStringSubmatch(output)
 	if len(matches) > 0 {
@@ -151,6 +164,12 @@ func extractUploadURL(output string) string {
 	return ""
 }
 
+// chatStreamToGin streams LLM responses back to client via Gin context
+// Args:
+//   c: Gin context for streaming response
+//   req: OpenAI chat completion request
+// Returns:
+//   completeAns: Full aggregated response from LLM
 func chatStreamToGin(c *gin.Context, req openai.ChatCompletionRequest) (completeAns string) {
 	var resp *openai.ChatCompletionStream
 

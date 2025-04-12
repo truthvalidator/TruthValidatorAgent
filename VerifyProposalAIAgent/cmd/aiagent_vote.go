@@ -19,18 +19,33 @@ import (
 	"github.com/truthvalidator/TruthValidatorAgent/VerifyProposalAIAgent/contracts/TruthValidatorSentientNet"
 )
 
-// aigentListenAndVoteCmd represents the aigent_listenAndVote command
+// aigentListenAndVoteCmd represents the command to listen and vote on proposals
 var aigentListenAndVoteCmd = &cobra.Command{
 	Use:   "aigent_listenAndVote [contract_address]",
-	Short: "Listen for ProposalSubmitted events and automatically vote on the proposal",
-	Args:  cobra.ExactArgs(1),
-	Run:   aigentListenAndVote,
+	Short: "Listen for ProposalSubmitted events and automatically vote using AI analysis",
+	Long: `This command continuously listens for new proposals on the TruthValidator contract.
+When a new proposal is detected, it uses AI analysis to determine the vote decision
+and automatically submits the vote with reasoning.
+
+Example:
+  ./TruthValidatorAgent aigent_listenAndVote 0x123...abc
+`,
+	Args: cobra.ExactArgs(1),
+	Run:  aigentListenAndVote,
 }
 
 func init() {
 	RootCmd.AddCommand(aigentListenAndVoteCmd)
 }
 
+// aigentListenAndVote implements the core proposal listening and voting logic
+// Workflow:
+// 1. Establishes blockchain connection
+// 2. Subscribes to ProposalSubmitted events
+// 3. For each proposal:
+//    - Calls AI service for analysis
+//    - Submits vote with reasoning
+// 4. Handles reconnections and errors
 func aigentListenAndVote(cmd *cobra.Command, args []string) {
 	contractAddr, err := ParseAddress(args[0])
 	if err != nil {
@@ -131,14 +146,14 @@ func aigentListenAndVote(cmd *cobra.Command, args []string) {
 	}
 }
 
-// AIReponse struct to hold the AI API response
-type AIReponse struct {
+// AIResponse represents the structured response from the AI analysis service
+type AIResponse struct {
 	Judge  bool   `json:"judge"`
 	Reason string `json:"reason"`
 }
 
 // decideVote calls the AI API to make a decision based on the proposal content
-func decideVote(ctx context.Context, content string) (*AIReponse, error) {
+func decideVote(ctx context.Context, content string) (*AIResponse, error) {
 	log.Println("Calling AI API for decision on content:", content)
 
 	// Call the AI API
@@ -159,7 +174,7 @@ func decideVote(ctx context.Context, content string) (*AIReponse, error) {
 	trimmedBody := trimMarkdownJSON(string(body))
 
 	// Parse the trimmed JSON response
-	var aiResponse AIReponse
+	var aiResponse AIResponse
 	err = json.Unmarshal([]byte(trimmedBody), &aiResponse)
 	if err != nil {
 		log.Printf("Failed to unmarshal AI API response: %v, body: %s", err, trimmedBody)
@@ -183,7 +198,13 @@ func trimMarkdownJSON(input string) string {
 	return trimmed
 }
 
-// callAISearchAPIForDecision calls the AI search API with the provided question for decision
+// callAISearchAPIForDecision invokes the AI decision API with the proposal content
+// Args:
+//   ctx: Context for request cancellation/timeout
+//   question: Proposal content to analyze
+// Returns:
+//   *http.Response: API response
+//   error: Any error that occurred
 func callAISearchAPIForDecision(ctx context.Context, question string) (*http.Response, error) {
 	log.Println("callAISearchAPIForDecision question:", question)
 	url := os.Getenv("AI_DECISION_URL") // Use a different env var for decision API URL, or reuse AI_SEARCH_URL if it's the same API endpoint

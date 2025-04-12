@@ -1,6 +1,9 @@
 
 # TruthValidator - Guardians of Digital Truth
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE-APACHE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE-MIT)
+
 **A Decentralized Truth Verification Protocol for the Post-Information Age**
 
 ## 🌍 Our Mission
@@ -97,6 +100,27 @@ gantt
     DAO Framework               :2025-07-01, 2026-03-31
     Dispute Resolution          :2026-01-01, 2026-09-30
 ```
+
+## 🤝 Contributing
+
+We welcome contributions from developers, researchers, and truth-seekers worldwide. Here's how you can help:
+
+1. **Code Contributions**:
+   - Fork the repository
+   - Create a feature branch (`git checkout -b feature/AmazingFeature`)
+   - Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+   - Push to the branch (`git push origin feature/AmazingFeature`)
+   - Open a Pull Request
+
+2. **Testing & Bug Reports**:
+   - Test the system and report issues
+   - Help improve test coverage
+
+3. **Documentation**:
+   - Improve existing docs
+   - Add tutorials and examples
+
+See our [Contribution Guidelines](CONTRIBUTING.md) for more details.
 
 ## ✊ Join the Truth Revolution
 

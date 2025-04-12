@@ -13,7 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 
 	// IPFS core components for decentralized storage
-	github.com/ipfs/go-cid v0.4.1 // Content ID handling
+	github.com/ipfs/go-cid v0.5.0 // Content ID handling
 	github.com/ipfs/go-unixfsnode v1.9.2 // UnixFS data handling
 	github.com/ipld/go-car/v2 v2.14.2 // Content Addressable Archives
 	github.com/ipld/go-codec-dagpb v1.6.0 // Protocol Buffers codec

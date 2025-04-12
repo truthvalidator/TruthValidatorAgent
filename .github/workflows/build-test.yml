@@ -1,0 +1,35 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: ['aisearch', 'VerifyProposalAIAgent']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Build ${{ matrix.project }}
+        working-directory: ${{ matrix.project }}
+        run: go build -v ./...
+
+      - name: Run tests
+        working-directory: ${{ matrix.project }}
+        run: go test -v ./...
+
+      - name: Verify dependencies
+        working-directory: ${{ matrix.project }}
+        run: |
+          go mod tidy
+          go mod verify

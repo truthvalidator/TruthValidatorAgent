@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/aisearch"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "gomod"
+    directory: "/VerifyProposalAIAgent"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5

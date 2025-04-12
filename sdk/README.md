@@ -13,7 +13,7 @@ Go SDK for interacting with TruthValidator smart contracts
 ## Installation
 
 ```bash
-go get github.com/truthvalidator/TruthValidatorAgent/VerifyProposalAIAgent/sdk
+go get github.com/truthvalidator/TruthValidatorAgent/sdk
 ```
 
 ## Usage Example
@@ -29,7 +29,7 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/truthvalidator/TruthValidatorAgent/VerifyProposalAIAgent/sdk"
+	"github.com/truthvalidator/TruthValidatorAgent/sdk"
 )
 
 func main() {

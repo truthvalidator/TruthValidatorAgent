@@ -1,115 +1,115 @@
-# **TruthValidator: 去中心化真相验证协议**  
-**基于AI、区块链与Filecoin的抗篡改信息验证网络**  
+# **TruthValidator: Decentralized Truth Verification Protocol**  
+**An AI, Blockchain and Filecoin-based Tamper-Resistant Information Verification Network**  
 
 ```mermaid
 graph TD
-    A[信息危机] --> B[TruthValidator]
-    B --> C[AI验证]
-    B --> D[社区共识] 
-    B --> E[永久存证]
-    C --> F[可信信息]
+    A[Information Crisis] --> B[TruthValidator]
+    B --> C[AI Verification]
+    B --> D[Community Consensus] 
+    B --> E[Permanent Storage]
+    C --> F[Trusted Information]
     D --> F
     E --> F
 ```
 
-在数字信息爆炸式增长的时代，TruthValidator构建了一个革命性的真相验证框架。该系统通过三重防御机制对抗虚假信息：首先由AI引擎进行智能分析，再通过去中心化社区达成共识判断，最终将验证证据永久存储在Filecoin网络中。这种分层验证架构确保了从技术分析到人类判断再到存证完整性的全流程可信性，为互联网信息生态提供了前所未有的可靠性保障。
+In the era of explosive digital information growth, TruthValidator constructs a revolutionary truth verification framework. The system combats misinformation through a triple-layer defense mechanism: first through AI engine analysis, then decentralized community consensus judgment, and finally permanent storage of verification evidence on the Filecoin network. This layered verification architecture ensures end-to-end credibility from technical analysis to human judgment to storage integrity, providing unprecedented reliability guarantees for the internet information ecosystem.
 
-## **1. 摘要（Executive Summary）**
+## **1. Executive Summary**
 
-TruthValidator代表着Web3时代信息验证基础设施的重大突破。该协议创造性地将人工智能的智能分析能力、区块链的共识机制以及去中心化存储的永久性相结合，构建了一个完整的真相验证生态系统。在技术实现层面，系统首先通过检索增强生成（RAG）技术对提交内容进行多维度分析，包括语义一致性检测、事实交叉验证和逻辑合理性评估；随后将初步分析结果提交给由DAO组织管理的验证社区进行集体决策；最终所有验证证据和过程记录都将通过Filecoin网络进行分布式存储，确保信息的长期可追溯性。这种三位一体的设计使得TruthValidator既具备AI系统的高效性，又保持了人类社区的判断力，同时还拥有区块链技术的不可篡改性。
+TruthValidator represents a major breakthrough in Web3-era information verification infrastructure. The protocol innovatively combines AI's analytical capabilities, blockchain's consensus mechanisms, and decentralized storage's permanence to build a complete truth verification ecosystem. Technically, the system first performs multidimensional analysis on submitted content through Retrieval-Augmented Generation (RAG) technology, including semantic consistency detection, fact cross-verification, and logical rationality assessment. The preliminary analysis results are then submitted to a verification community managed by DAO for collective decision-making. Finally, all verification evidence and process records are stored distributedly on the Filecoin network, ensuring long-term traceability. This trinity design gives TruthValidator both the efficiency of AI systems and the judgment of human communities, along with blockchain's immutability.
 
-## **2. 问题与现状**
+## **2. Problems and Current Situation**
 
-### **2.1 信息生态危机**
+### **2.1 Information Ecosystem Crisis**
 
 ```mermaid
 pie
-    title 虚假信息来源
-    "AI生成内容" : 45
-    "刻意误导" : 30
-    "无意错误" : 15
-    "其他" : 10
+    title Sources of Misinformation
+    "AI-generated content" : 45
+    "Intentional deception" : 30
+    "Unintentional errors" : 15
+    "Other" : 10
 ```
 
-当前数字信息生态面临着前所未有的信任危机。随着生成式AI技术的普及，伪造文本、图像和视频的门槛大幅降低，导致网络虚假信息呈现指数级增长。根据最新研究，约45%的虚假内容源自AI生成工具，这些内容往往具有高度的迷惑性；另有30%属于人为刻意制造的误导信息，通常带有特定目的性；其余25%则包括无意传播的错误信息等。这种状况严重侵蚀了社会的信息信任基础，使得公众越来越难以辨别真相。传统社交媒体平台采用的集中式审核机制不仅效率低下，还存在审查偏见和单点故障风险，亟需新一代解决方案。
+The current digital information ecosystem faces unprecedented trust crisis. With the proliferation of generative AI technology, the barrier to fabricating text, images and videos has significantly lowered, leading to exponential growth of online misinformation. According to recent research, about 45% of false content originates from AI generation tools, often highly deceptive; another 30% constitutes deliberately manufactured misleading information with specific agendas; the remaining 25% includes unintentionally spread errors. This situation severely erodes society's information trust foundation, making it increasingly difficult for the public to discern truth. Traditional centralized moderation mechanisms used by social media platforms are not only inefficient but also suffer from censorship bias and single-point failure risks, urgently requiring next-generation solutions.
 
-### **2.2 传统方案缺陷**
+### **2.2 Limitations of Traditional Solutions**
 
-| 方案 | 问题 | 我们的改进 |
+| Solution | Problems | Our Improvements |
 |------|------|-----------|
-|人工审核|效率低、成本高|AI自动化验证|
-|中心化平台|单点控制风险|去中心化网络|
-|简单存证|缺乏分析|完整验证链|
+|Manual Review|Low efficiency, high cost|AI automated verification|
+|Centralized Platforms|Single-point control risk|Decentralized network|
+|Simple Storage|Lacks analysis|Complete verification chain|
 
-现有信息验证方案存在系统性缺陷。人工审核虽然在某些场景下有效，但面对海量互联网内容时显得力不从心，且容易受到主观偏见影响。中心化平台如事实核查机构虽然具有一定公信力，但其决策过程不透明，存在被操控或施压的风险。简单的区块链存证方案虽然保证了信息不可篡改，但缺乏对内容真实性的主动验证能力。TruthValidator的创新之处在于将这些方法的优势有机结合：利用AI进行初步自动化分析提高效率，通过去中心化社区投票确保决策公正性，最后将完整验证过程永久上链保存，形成可审计的真相验证全记录。
+Existing information verification solutions have systemic flaws. Manual review, while effective in certain scenarios, becomes inadequate facing massive internet content and is prone to subjective bias. Centralized platforms like fact-checking organizations have some credibility but their decision processes lack transparency and risk manipulation. Simple blockchain storage solutions guarantee immutability but lack active content authenticity verification. TruthValidator's innovation lies in organically combining these methods' advantages: using AI for preliminary automated analysis to improve efficiency, ensuring fairness through decentralized community voting, and permanently storing the complete verification process on-chain to form auditable truth verification records.
 
-## **3. 技术架构**
+## **3. Technical Architecture**
 
-### **3.1 系统概览**
+### **3.1 System Overview**
 
 ```mermaid
 flowchart TB
-    subgraph 输入层
-    A[用户提交]
+    subgraph Input Layer
+    A[User Submission]
     end
 
-    subgraph 处理层
-    B[AI分析]
-    C[社区投票]
+    subgraph Processing Layer
+    B[AI Analysis]
+    C[Community Voting]
     end
 
-    subgraph 输出层
-    D[验证结果]
-    E[永久存证]
+    subgraph Output Layer
+    D[Verification Result]
+    E[Permanent Storage]
     end
 
     A --> B --> C --> D
     C --> E
 ```
 
-TruthValidator采用模块化分层架构设计，确保系统各组件既能独立演进又能协同工作。在输入层，系统支持多种提交方式，包括专门的API接口、浏览器插件和移动应用，用户可以通过这些渠道提交需要验证的内容。处理层是系统的智能核心，AI分析模块采用最新的多模态大语言模型，能够同时处理文本、图像和视频内容，通过知识图谱比对、语义分析和事实核查等多种技术手段生成初步验证报告。社区投票模块则构建在DAO治理框架之上，验证者通过质押代币参与决策，系统采用二次方投票等创新机制防止寡头垄断。输出层不仅返回最终的验证结论，还会将所有相关证据和决策过程通过IPFS和Filecoin进行分布式存储，生成内容指纹并记录在区块链上，确保长期可验证性。
+TruthValidator adopts modular layered architecture design ensuring system components can evolve independently while working collaboratively. The input layer supports multiple submission methods including dedicated API interfaces, browser extensions and mobile apps. The processing layer is the system's intelligent core - the AI analysis module employs cutting-edge multimodal large language models capable of processing text, images and video simultaneously, generating preliminary verification reports through techniques like knowledge graph comparison, semantic analysis and fact-checking. The community voting module builds on DAO governance framework where verifiers participate in decision-making through token staking, using innovative mechanisms like quadratic voting to prevent oligopoly. The output layer not only returns final verification conclusions but also stores all related evidence and decision processes distributedly on IPFS and Filecoin, generating content fingerprints recorded on blockchain to ensure long-term verifiability.
 
-### **3.2 核心创新**
+### **3.2 Core Innovations**
 
-**1. AI验证引擎**
+**1. AI Verification Engine**
 
 ```mermaid
 graph LR
-    S[搜索] --> R[检索]
-    R --> A[分析]
-    A --> V[验证]
-    V --> O[输出]
+    S[Search] --> R[Retrieve]
+    R --> A[Analyze]
+    A --> V[Verify]
+    V --> O[Output]
 ```
 
-TruthValidator的AI验证引擎采用检索增强生成（RAG）架构，实现了知识实时更新与深度推理的结合。当接收到验证请求时，系统首先通过去中心化搜索引擎在可信知识库和公开网络中进行广泛检索，收集相关证据材料。检索模块特别优化了对抗虚假信息的能力，能够识别并过滤已知的不可靠信源。分析阶段采用多模型集成策略，结合事实核查模型、逻辑一致性检测器和情感倾向分析器等专业工具，从不同角度评估内容可信度。验证环节引入了不确定性量化技术，当AI系统对判断置信度不足时，会自动标记需要人类验证者重点关注的方面，为后续社区投票提供智能指引。
+TruthValidator's AI verification engine adopts Retrieval-Augmented Generation (RAG) architecture combining real-time knowledge updates with deep reasoning. When receiving verification requests, the system first performs extensive searches in trusted knowledge bases and public networks through decentralized search engines to collect relevant evidence. The retrieval module is specially optimized against misinformation, capable of identifying and filtering known unreliable sources. The analysis phase employs multi-model ensemble strategies combining specialized tools like fact-checking models, logical consistency detectors and sentiment analyzers to evaluate content credibility from multiple perspectives. The verification phase incorporates uncertainty quantification - when AI confidence is insufficient, it automatically flags aspects requiring human verifiers' attention, providing intelligent guidance for subsequent community voting.
 
-**2. 共识机制**
+**2. Consensus Mechanism**
 
 ```mermaid
 sequenceDiagram
-    用户->>合约: 提交提案
-    合约->>AI: 分析请求
-    AI->>合约: 返回结果
-    合约->>社区: 发起投票
-    社区->>合约: 投票结果
+    User->>Contract: Submit Proposal
+    Contract->>AI: Analysis Request
+    AI->>Contract: Return Results
+    Contract->>Community: Initiate Voting
+    Community->>Contract: Voting Results
 ```
 
-项目的共识机制设计平衡了效率与去中心化原则。当用户提交验证请求并支付相应费用后，智能合约会生成唯一的验证提案ID并触发AI分析流程。AI生成的初步报告将作为社区投票的参考依据，但不会直接决定最终结果。投票阶段采用改良的延迟共识算法，验证者需要在一定时间内评估证据并投票，系统根据参与者的信誉权重和质押数量计算加权结果。为了防止女巫攻击，投票权分配采用了基于身份验证和代币质押的混合模型，同时引入反勾结机制防止投票权集中化。最终结果将通过预言机服务反馈给用户，整个过程通常可在数小时内完成，既保证了充分讨论又避免了传统DAO决策的冗长问题。
+The project's consensus mechanism balances efficiency with decentralization principles. When users submit verification requests and pay corresponding fees, smart contracts generate unique verification proposal IDs and trigger AI analysis. AI-generated preliminary reports serve as voting references but don't directly determine outcomes. The voting phase uses improved delayed consensus algorithms where verifiers must evaluate evidence and vote within set timeframes, with the system calculating weighted results based on participants' reputation weights and stake amounts. To prevent Sybil attacks, voting rights allocation employs hybrid models combining identity verification with token staking, while anti-collusion mechanisms prevent centralization. Final results are fed back to users through oracle services, typically completing within hours - ensuring adequate discussion while avoiding traditional DAO decision delays.
 
-**3. 存储系统**
+**3. Storage System**
 
 ```mermaid
 flowchart LR
-    数据 --> IPFS --> Filecoin --> 区块链
+    Data --> IPFS --> Filecoin --> Blockchain
 ```
 
-信息存证系统是TruthValidator的基础设施支柱。所有验证过程中产生的数据，包括原始内容、AI分析报告、投票记录和最终结论，都会通过内容寻址方式存储在IPFS网络中，生成唯一的CID哈希。这些CID指针随后被注册到Filecoin网络进行长期存储保障，通过智能合约自动续约存储交易，确保数据永久可用。为了进一步保证数据的抗审查性，系统采用了地理分布式存储策略，将数据碎片加密后存储在全球不同区域的存储节点上。区块链层则记录了完整的验证过程元数据，包括时间戳、参与方和关键决策点，形成不可篡改的审计线索。这种分层存储架构既满足了大规模数据存储的经济性要求，又确保了关键元数据的绝对可信。
+The information storage system forms TruthValidator's infrastructure backbone. All verification process data including original content, AI analysis reports, voting records and final conclusions are stored on IPFS network through content addressing, generating unique CID hashes. These CID pointers are then registered on Filecoin network for long-term storage guarantees through smart contract-automated storage deal renewals. To further ensure censorship resistance, the system employs geo-distributed storage strategies encrypting and fragmenting data across global nodes. The blockchain layer records complete verification metadata including timestamps, participants and key decision points, forming immutable audit trails. This layered storage architecture meets both mass data storage economic requirements and absolute metadata trustworthiness needs.
 
-## **4. 技术实现**
+## **4. Technical Implementation**
 
-### **4.1 模块详解**
+### **4.1 Module Details**
 
-**智能合约**
+**Smart Contracts**
 
 ```mermaid
 classDiagram
@@ -120,50 +120,50 @@ classDiagram
     }
 ```
 
-TruthValidator的智能合约系统采用模块化设计，核心合约负责管理验证提案的全生命周期。submitProposal方法处理用户提交的验证请求，包括内容哈希计算、费用收取和提案状态初始化。vote方法实现了复杂的投票逻辑，支持多种投票权重计算方式，并内置了防作弊检测机制。finalize方法则根据预设的共识规则确定最终验证结果，并触发结果通知和奖励分配。除了核心合约外，系统还包括信誉管理合约、代币经济合约和存储管理合约等辅助模块，共同构成了完整的去中心化验证协议栈。合约代码经过形式化验证和多轮审计，确保在各类边界条件下都能正确执行。
+TruthValidator's smart contract system adopts modular design with core contracts managing verification proposal lifecycles. The submitProposal method handles user verification requests including content hash calculation, fee collection and proposal state initialization. The vote method implements complex voting logic supporting multiple voting weight calculation approaches with built-in anti-cheat detection. The finalize method determines final verification results according to preset consensus rules while triggering result notifications and reward distribution. Beyond core contracts, auxiliary modules include reputation management contracts, token economy contracts and storage management contracts collectively forming a complete decentralized verification protocol stack. Contract code undergoes formal verification and multiple audit rounds ensuring correct execution under various edge cases.
 
-**AI工作流**
+**AI Workflow**
 
 ```mermaid
 journey
-    title AI验证流程
-    section 检索
-      获取数据: 5
-    section 分析
-      处理内容: 4
-    section 验证
-      生成证据: 3
+    title AI Verification Process
+    section Retrieval
+      Data Collection: 5
+    section Analysis
+      Content Processing: 4
+    section Verification
+      Evidence Generation: 3
 ```
 
-AI子系统的执行流程经过精心优化以实现效率与准确性的平衡。检索阶段首先对输入内容进行关键词提取和语义解析，然后并行查询多个知识源，包括权威数据库、学术期刊和经过验证的新闻档案，这一阶段通常占据整个处理时间的50%。分析阶段采用管道架构，依次进行事实性检查、逻辑一致性分析和信源可靠性评估，每个环节都生成详细的中间结果。验证阶段则综合所有分析结果，生成结构化验证报告，包括可信度评分、关键证据点和不确定性说明。整个流程采用异步微服务架构，可以根据负载动态扩展处理能力，确保系统在面对突发流量时仍能保持稳定响应。
+The AI subsystem's execution flow is carefully optimized to balance efficiency and accuracy. The retrieval phase first extracts keywords and performs semantic parsing on input content, then queries multiple knowledge sources in parallel including authoritative databases, academic journals and verified news archives - this phase typically occupies 50% of total processing time. The analysis phase employs pipeline architecture sequentially performing fact-checking, logical consistency analysis and source reliability assessment, each generating detailed intermediate results. The verification phase synthesizes all analysis to produce structured reports including credibility scores, key evidence points and uncertainty explanations. The entire process uses asynchronous microservice architecture that can dynamically scale processing capacity based on load, ensuring stable responses during traffic spikes.
 
-### **4.2 关键技术**
+### **4.2 Key Technologies**
 
-TruthValidator整合了多项前沿技术以实现其设计目标。多模态内容分析技术使系统能够统一处理文本、图像、音频和视频内容，通过跨模态对比检测潜在的伪造痕迹。去中心化身份认证系统基于W3C的DID标准，为每位验证者建立可验证的数字身份，同时保护个人隐私。零知识证明技术的应用使得某些敏感内容的验证可以在不泄露原始信息的情况下进行，特别适合企业机密和个人隐私相关场景。跨链互操作性设计则通过桥接协议支持多区块链平台，用户可以选择在以太坊、Filecoin或其他兼容链上发起验证请求，系统会自动选择最经济高效的链完成交易处理。这些技术创新共同构成了TruthValidator区别于传统验证方案的技术护城河。
+TruthValidator integrates multiple cutting-edge technologies to achieve its design goals. Multimodal content analysis enables unified processing of text, images, audio and video through cross-modal comparison detecting potential fabrication traces. The decentralized identity authentication system based on W3C's DID standards establishes verifiable digital identities for each verifier while protecting privacy. Zero-knowledge proof applications allow sensitive content verification without exposing originals, particularly suitable for corporate confidential and personal privacy scenarios. Cross-chain interoperability designs support multiple blockchain platforms through bridging protocols - users can initiate verification requests on Ethereum, Filecoin or other compatible chains with the system automatically selecting most cost-efficient chains for transaction processing. These technological innovations collectively form TruthValidator's technical moat distinguishing it from traditional verification solutions.
 
-## **5. 应用场景**
+## **5. Application Scenarios**
 
-### **5.1 典型用例**
+### **5.1 Typical Use Cases**
 
 ```mermaid
 mindmap
-  root((应用场景))
-    新闻验证
-      事实核查
-      来源追踪
-    学术诚信
-      论文验证
-      数据审计
-    电商防伪
-      商品认证
-      供应链追溯
+  root((Application Scenarios))
+    News Verification
+      Fact-checking
+      Source Tracing
+    Academic Integrity
+      Paper Verification
+      Data Auditing
+    E-commerce Anti-Counterfeiting
+      Product Authentication
+      Supply Chain Tracing
 ```
 
-TruthValidator的应用场景覆盖了数字信息生态的多个关键领域。在新闻验证方面，媒体机构可以实时核查新闻报道中的关键事实，读者则可以追溯信息的原始来源，打破信息传播的"回音室"效应。学术领域应用包括研究论文的原创性验证和实验数据的真实性审计，帮助学术界建立更加透明的质量监督机制。电子商务平台可以利用该系统验证商品真伪和供应链信息，为消费者提供可靠的购物决策依据。此外，系统还适用于社交媒体内容审核、金融信息披露验证、法律证据保全等多个专业领域，几乎涵盖了所有对信息真实性有高要求的应用场景。随着技术的不断完善，TruthValidator有望成为互联网信息基础设施中不可或缺的信任层。
+TruthValidator's application scenarios cover multiple critical areas of digital information ecosystems. For news verification, media organizations can fact-check key claims in real-time while readers trace information to original sources, breaking information "echo chambers". Academic applications include research paper originality verification and experimental data authenticity audits, helping establish more transparent quality oversight. E-commerce platforms can authenticate products and supply chain information, providing reliable shopping decision support. Additional applications span social media content moderation, financial disclosure verification, legal evidence preservation and other professional domains requiring high information authenticity. As technology matures, TruthValidator may become an indispensable trust layer in internet information infrastructure.
 
-## **6. 生态发展**
+## **6. Ecosystem Development**
 
-### **6.1 路线图**
+### **6.1 Roadmap**
 
 ```mermaid
 gantt
@@ -186,25 +186,25 @@ gantt
     Dispute Resolution          :2026-01-01, 2026-09-30
 ```
 
-TruthValidator的发展遵循明确的阶段性规划，确保核心技术稳固的同时逐步扩展生态系统。在核心协议层，当前重点完善智能合约的安全性和性能优化，以及AI模型的准确率提升。生态系统建设方面，除了基础的用户接口开发外，正在构建面向开发者的API平台和数据分析工具，降低第三方集成门槛。治理模型的演进则采取渐进式去中心化策略，初期由核心团队引导，逐步过渡到完全由社区主导的DAO治理。每个发展阶段都设有明确的技术指标和社区里程碑，确保项目始终朝着既定的愿景稳步前进。这种务实的发展策略既保证了项目的可持续性，又为技术创新留出了充足空间。
+TruthValidator's development follows clear phased planning ensuring core technology stability while gradually expanding ecosystems. At the core protocol level, current focus is improving smart contract security and performance optimization alongside AI model accuracy enhancement. For ecosystem building, beyond basic user interface development, API platforms and data analysis tools are being constructed to lower third-party integration barriers. Governance model evolution adopts gradual decentralization strategies - initially core team-guided before transitioning to full community-led DAO governance. Each development phase has clear technical metrics and community milestones ensuring steady progress toward the vision. This pragmatic development strategy ensures project sustainability while allowing ample innovation space.
 
-## **7. 总结展望**
+## **7. Summary and Outlook**
 
-**技术价值**
+**Technical Value**
 
 ```mermaid
 pie
-    title 技术贡献
-    "验证协议" : 40
-    "存储方案" : 30
-    "治理模型" : 20
-    "其他" : 10
+    title Technical Contributions
+    "Verification Protocol" : 40
+    "Storage Solution" : 30
+    "Governance Model" : 20
+    "Other" : 10
 ```
 
-TruthValidator的技术创新主要体现在三个方面：首先是构建了完整的去中心化验证协议栈，定义了从内容提交到最终裁决的标准流程；其次是开发了与Filecoin深度集成的存储方案，解决了验证证据的长期保存问题；最后是设计了兼顾效率与公平的新型治理模型，为社区驱动的真相验证提供了可行框架。这些技术创新共同构成了项目40%的核心价值。存储方案贡献了30%的价值，解决了信息验证中最关键的证据保全问题。治理模型和其他创新则分别贡献了20%和10%的价值。
+TruthValidator's technical innovations mainly manifest in three aspects: first is constructing a complete decentralized verification protocol stack defining standard processes from content submission to final adjudication; second is developing Filecoin-integrated storage solutions solving long-term verification evidence preservation; third is designing novel governance models balancing efficiency and fairness for community-driven truth verification. These collectively constitute 40% of core value. Storage solutions contribute 30% by addressing evidence preservation - the most critical verification aspect. Governance models and other innovations contribute 20% and 10% respectively.
 
-展望未来，TruthValidator计划在三个方向持续创新：扩展多链验证网络支持，使系统能够服务于更广泛的区块链生态系统；增强隐私保护功能，开发基于同态加密等技术的隐私保护验证方案；参与开放标准制定，推动去中心化验证协议成为行业通用标准。长期来看，TruthValidator有望发展成为数字信息领域的信任基础协议，如同TCP/IP之于互联网一样，为各类应用提供底层的真实性保障。正如项目宣言所言，其终极目标是"构建信息可信互联网的基础协议"，这一愿景正在通过持续的技术创新和社区建设逐步变为现实。
+Looking ahead, TruthValidator plans continuous innovation in three directions: expanding multi-chain verification network support to serve broader blockchain ecosystems; enhancing privacy features developing solutions based on homomorphic encryption; participating in open standard formulation to advance decentralized verification protocols as industry standards. Long-term, TruthValidator may develop into digital information's foundational trust protocol - like TCP/IP for the internet - providing underlying authenticity guarantees. As the manifesto states, its ultimate goal is "building foundational protocols for a trustworthy internet", a vision gradually materializing through continuous technological innovation and community building.
 
-## **8. 参与方式**
+## **8. Participation Methods**
 
-TruthValidator是一个完全开源的项目，欢迎各类贡献者加入这一意义深远的事业。开发者可以通过GitHub参与核心代码开发或构建周边工具，当前优先开发的任务包括AI模型优化、跨链互操作性增强和用户界面改进。研究人员可以贡献在虚假信息检测、共识算法或密码学等领域的研究成果，帮助提升系统的技术先进性。普通用户则可以运行验证节点参与社区投票，或者简单地在日常使用中提供反馈帮助改进产品体验。项目采用开放治理模式，所有重大决策都通过社区讨论和投票确定，确保发展方向符合集体利益。通过官网可以获取最新开发动态，文档库提供了详细的技术规范和使用指南，社区论坛则是交流想法和寻求帮助的最佳场所。我们相信，只有通过广泛的社区参与和协作，才能真正实现构建可信互联网的宏伟目标。
+TruthValidator is fully open-source, welcoming contributors to join this meaningful endeavor. Developers can participate in core code development or build peripheral tools through GitHub - current priority tasks include AI model optimization, cross-chain interoperability enhancement and UI improvements. Researchers can contribute findings in misinformation detection, consensus algorithms or cryptography to advance technical sophistication. Regular users can operate verification nodes participating in community voting or simply provide usage feedback to improve products. The project adopts open governance where major decisions undergo community discussion and voting ensuring alignment with collective interests. Official websites provide latest development updates, documentation offers detailed technical specifications, while community forums are ideal for idea exchange and support. We believe only through broad community participation and collaboration can we truly realize the grand vision of building a trustworthy internet.

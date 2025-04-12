@@ -1,5 +1,5 @@
 # **TruthValidator: Decentralized Truth Verification Protocol**  
-**An AI, Blockchain and Filecoin-based Tamper-Resistant Information Verification Network**  
+### Tamper-proof information verification network based on AI and Blockchain
 
 ```mermaid
 graph TD
@@ -12,11 +12,11 @@ graph TD
     E --> F
 ```
 
-In the era of explosive digital information growth, TruthValidator constructs a revolutionary truth verification framework. The system combats misinformation through a triple-layer defense mechanism: first through AI engine analysis, then decentralized community consensus judgment, and finally permanent storage of verification evidence on the Filecoin network. This layered verification architecture ensures end-to-end credibility from technical analysis to human judgment to storage integrity, providing unprecedented reliability guarantees for the internet information ecosystem.
+In the era of explosive digital information growth, TruthValidator constructs a revolutionary truth verification framework. The system combats misinformation through a triple-layer defense mechanism: first through AI engine analysis, then decentralized community consensus judgment, and finally permanent storage of verification evidence on the IPFS network. This layered verification architecture ensures end-to-end credibility from technical analysis to human judgment to storage integrity, providing unprecedented reliability guarantees for the internet information ecosystem.
 
 ## **1. Executive Summary**
 
-TruthValidator represents a major breakthrough in Web3-era information verification infrastructure. The protocol innovatively combines AI's analytical capabilities, blockchain's consensus mechanisms, and decentralized storage's permanence to build a complete truth verification ecosystem. Technically, the system first performs multidimensional analysis on submitted content through Retrieval-Augmented Generation (RAG) technology, including semantic consistency detection, fact cross-verification, and logical rationality assessment. The preliminary analysis results are then submitted to a verification community managed by DAO for collective decision-making. Finally, all verification evidence and process records are stored distributedly on the Filecoin network, ensuring long-term traceability. This trinity design gives TruthValidator both the efficiency of AI systems and the judgment of human communities, along with blockchain's immutability.
+TruthValidator represents a major breakthrough in Web3-era information verification infrastructure. The protocol innovatively combines AI's analytical capabilities, blockchain's consensus mechanisms, and decentralized storage's permanence to build a complete truth verification ecosystem. Technically, the system first performs multidimensional analysis on submitted content through Retrieval-Augmented Generation (RAG) technology, including semantic consistency detection, fact cross-verification, and logical rationality assessment. The preliminary analysis results are then submitted to a verification community managed by DAO for collective decision-making. Finally, all verification evidence and process records are stored distributedly on the IPFS network, ensuring long-term traceability. This trinity design gives TruthValidator both the efficiency of AI systems and the judgment of human communities, along with blockchain's immutability.
 
 ## **2. Problems and Current Situation**
 
@@ -67,7 +67,7 @@ flowchart TB
     C --> E
 ```
 
-TruthValidator adopts modular layered architecture design ensuring system components can evolve independently while working collaboratively. The input layer supports multiple submission methods including dedicated API interfaces, browser extensions and mobile apps. The processing layer is the system's intelligent core - the AI analysis module employs cutting-edge multimodal large language models capable of processing text, images and video simultaneously, generating preliminary verification reports through techniques like knowledge graph comparison, semantic analysis and fact-checking. The community voting module builds on DAO governance framework where verifiers participate in decision-making through token staking, using innovative mechanisms like quadratic voting to prevent oligopoly. The output layer not only returns final verification conclusions but also stores all related evidence and decision processes distributedly on IPFS and Filecoin, generating content fingerprints recorded on blockchain to ensure long-term verifiability.
+TruthValidator adopts modular layered architecture design ensuring system components can evolve independently while working collaboratively. The input layer supports multiple submission methods including dedicated API interfaces, browser extensions and mobile apps. The processing layer is the system's intelligent core - the AI analysis module employs cutting-edge multimodal large language models capable of processing text, images and video simultaneously, generating preliminary verification reports through techniques like knowledge graph comparison, semantic analysis and fact-checking. The community voting module builds on DAO governance framework where verifiers participate in decision-making through token staking, using innovative mechanisms like quadratic voting to prevent oligopoly. The output layer not only returns final verification conclusions but also stores all related evidence and decision processes distributedly on IPFS and IPFS, generating content fingerprints recorded on blockchain to ensure long-term verifiability.
 
 ### **3.2 Core Innovations**
 
@@ -100,10 +100,10 @@ The project's consensus mechanism balances efficiency with decentralization prin
 
 ```mermaid
 flowchart LR
-    Data --> IPFS --> Filecoin --> Blockchain
+    Data --> IPFS --> IPFS --> Blockchain
 ```
 
-The information storage system forms TruthValidator's infrastructure backbone. All verification process data including original content, AI analysis reports, voting records and final conclusions are stored on IPFS network through content addressing, generating unique CID hashes. These CID pointers are then registered on Filecoin network for long-term storage guarantees through smart contract-automated storage deal renewals. To further ensure censorship resistance, the system employs geo-distributed storage strategies encrypting and fragmenting data across global nodes. The blockchain layer records complete verification metadata including timestamps, participants and key decision points, forming immutable audit trails. This layered storage architecture meets both mass data storage economic requirements and absolute metadata trustworthiness needs.
+The information storage system forms TruthValidator's infrastructure backbone. All verification process data including original content, AI analysis reports, voting records and final conclusions are stored on IPFS network through content addressing, generating unique CID hashes. These CID pointers are then registered on IPFS network for long-term storage guarantees through smart contract-automated storage deal renewals. To further ensure censorship resistance, the system employs geo-distributed storage strategies encrypting and fragmenting data across global nodes. The blockchain layer records complete verification metadata including timestamps, participants and key decision points, forming immutable audit trails. This layered storage architecture meets both mass data storage economic requirements and absolute metadata trustworthiness needs.
 
 ## **4. Technical Implementation**
 
@@ -139,7 +139,7 @@ The AI subsystem's execution flow is carefully optimized to balance efficiency a
 
 ### **4.2 Key Technologies**
 
-TruthValidator integrates multiple cutting-edge technologies to achieve its design goals. Multimodal content analysis enables unified processing of text, images, audio and video through cross-modal comparison detecting potential fabrication traces. The decentralized identity authentication system based on W3C's DID standards establishes verifiable digital identities for each verifier while protecting privacy. Zero-knowledge proof applications allow sensitive content verification without exposing originals, particularly suitable for corporate confidential and personal privacy scenarios. Cross-chain interoperability designs support multiple blockchain platforms through bridging protocols - users can initiate verification requests on Ethereum, Filecoin or other compatible chains with the system automatically selecting most cost-efficient chains for transaction processing. These technological innovations collectively form TruthValidator's technical moat distinguishing it from traditional verification solutions.
+TruthValidator integrates multiple cutting-edge technologies to achieve its design goals. Multimodal content analysis enables unified processing of text, images, audio and video through cross-modal comparison detecting potential fabrication traces. The decentralized identity authentication system based on W3C's DID standards establishes verifiable digital identities for each verifier while protecting privacy. Zero-knowledge proof applications allow sensitive content verification without exposing originals, particularly suitable for corporate confidential and personal privacy scenarios. Cross-chain interoperability designs support multiple blockchain platforms through bridging protocols - users can initiate verification requests on Ethereum, IPFS or other compatible chains with the system automatically selecting most cost-efficient chains for transaction processing. These technological innovations collectively form TruthValidator's technical moat distinguishing it from traditional verification solutions.
 
 ## **5. Application Scenarios**
 
@@ -201,7 +201,7 @@ pie
     "Other" : 10
 ```
 
-TruthValidator's technical innovations mainly manifest in three aspects: first is constructing a complete decentralized verification protocol stack defining standard processes from content submission to final adjudication; second is developing Filecoin-integrated storage solutions solving long-term verification evidence preservation; third is designing novel governance models balancing efficiency and fairness for community-driven truth verification. These collectively constitute 40% of core value. Storage solutions contribute 30% by addressing evidence preservation - the most critical verification aspect. Governance models and other innovations contribute 20% and 10% respectively.
+TruthValidator's technical innovations mainly manifest in three aspects: first is constructing a complete decentralized verification protocol stack defining standard processes from content submission to final adjudication; second is developing IPFS-integrated storage solutions solving long-term verification evidence preservation; third is designing novel governance models balancing efficiency and fairness for community-driven truth verification. These collectively constitute 40% of core value. Storage solutions contribute 30% by addressing evidence preservation - the most critical verification aspect. Governance models and other innovations contribute 20% and 10% respectively.
 
 Looking ahead, TruthValidator plans continuous innovation in three directions: expanding multi-chain verification network support to serve broader blockchain ecosystems; enhancing privacy features developing solutions based on homomorphic encryption; participating in open standard formulation to advance decentralized verification protocols as industry standards. Long-term, TruthValidator may develop into digital information's foundational trust protocol - like TCP/IP for the internet - providing underlying authenticity guarantees. As the manifesto states, its ultimate goal is "building foundational protocols for a trustworthy internet", a vision gradually materializing through continuous technological innovation and community building.
 

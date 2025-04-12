@@ -21,7 +21,7 @@ require (
 	github.com/go-telegram/bot v1.14.2
 	github.com/joho/godotenv v1.5.1
 	github.com/mnt-ltd/daemore v0.0.0-20240227053424-d57afb9f5e67
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.9.1
 	go.uber.org/zap v1.27.0
 )
 
@@ -52,7 +52,7 @@ require (
 	github.com/prometheus/client_golang v1.17.0 // indirect
 	github.com/rs/cors v1.11.0 // indirect
 	github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/supranational/blst v0.3.14 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect

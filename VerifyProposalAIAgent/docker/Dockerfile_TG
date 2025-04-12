@@ -1,24 +1,50 @@
+# Dockerfile for TruthValidator Telegram Bot
+#
+# This multi-stage build:
+# 1. Builds the Go application in an Alpine-based builder
+# 2. Creates a lean production image using Ubuntu
+#
+# Version: 1.0.0
+# Maintainer: TruthValidator Team
+
+# ========== Builder Stage ==========
 FROM golang:1.22.5-alpine AS builder
 
+# Install build dependencies
 RUN apk add --no-cache git ca-certificates
 
+# Set working directory
 WORKDIR /go/src/VerifyProposalAIAgent
 
-COPY .. . 
+# Copy source code
+COPY .. .
 
+# Download Go modules
 RUN go mod download
 
+# Build the application with optimizations:
+# - Disable CGO for static binary
+# - Target Linux/amd64
+# - Strip debug symbols (-ldflags "-s -w")
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v \
+    -o /go/bin/TruthValidator-tgbot \
+    -ldflags "-s -w" \
+    ./tgbot 
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o /go/bin/TruthValidator-tgbot -ldflags "-s -w" ./tgbot 
-
+# ========== Runtime Stage ==========
 FROM ubuntu:22.04
 WORKDIR /root/
 
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+# Install runtime dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy built binary from builder
 COPY --from=builder /go/bin/TruthValidator-tgbot /root/TruthValidator-tgbot
 
+# Make binary executable
 RUN chmod +x /root/TruthValidator-tgbot
 
-
+# Default command (Note: Actual command should be provided at runtime)
 CMD ["/root/TruthValidator-tgbot", ""]

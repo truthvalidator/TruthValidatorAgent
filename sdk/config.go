@@ -7,23 +7,23 @@ import (
 )
 
 const (
-	// DefaultRPCURL 默认RPC节点URL
+	// DefaultRPCURL default RPC node URL
 	DefaultRPCURL = "http://localhost:8545"
 )
 
-// Config SDK配置
+// Config SDK configuration
 type Config struct {
-	// RPCURL 以太坊节点RPC URL
+	// RPCURL Ethereum node RPC URL
 	RPCURL string
 
-	// ContractAddress 合约地址
+	// ContractAddress contract address
 	ContractAddress common.Address
 
-	// ChainID 链ID
+	// ChainID chain ID
 	ChainID *big.Int
 }
 
-// NewDefaultConfig 创建默认配置
+// NewDefaultConfig creates default configuration
 func NewDefaultConfig(contractAddress common.Address, chainID *big.Int) *Config {
 	return &Config{
 		RPCURL:         DefaultRPCURL,
@@ -32,7 +32,7 @@ func NewDefaultConfig(contractAddress common.Address, chainID *big.Int) *Config 
 	}
 }
 
-// Validate 验证配置有效性
+// Validate validates configuration
 func (c *Config) Validate() error {
 	if c.RPCURL == "" {
 		return ErrRPCConnection

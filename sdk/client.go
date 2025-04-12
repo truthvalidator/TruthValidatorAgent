@@ -11,20 +11,20 @@ type TruthValidatorClient struct {
 	client   *ethclient.Client
 }
 
-// NewClient 创建新的TruthValidator客户端
+// NewClient creates a new TruthValidator client
 func NewClient(cfg *Config) (*TruthValidatorClient, error) {
-	// 验证配置
+	// Validate configuration
 	if err := cfg.Validate(); err != nil {
 		return nil, err
 	}
 
-	// 连接以太坊节点
+	// Connect to Ethereum node
 	client, err := ethclient.Dial(cfg.RPCURL)
 	if err != nil {
 		return nil, err
 	}
 
-	// 实例化合约
+	// Instantiate contract
 	contract, err := TruthValidatorSentientNet.NewTruthValidatorSentientNet(cfg.ContractAddress, client)
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func NewClient(cfg *Config) (*TruthValidatorClient, error) {
 	}, nil
 }
 
-// Close 关闭客户端连接
+// Close closes the client connection
 func (c *TruthValidatorClient) Close() {
 	if c.client != nil {
 		c.client.Close()

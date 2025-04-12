@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-// ProposalInfo 提案信息
+// ProposalInfo proposal information
 type ProposalInfo struct {
 	Proposer    common.Address
 	ContentHash string
@@ -16,21 +16,21 @@ type ProposalInfo struct {
 	VoteCount   *big.Int
 }
 
-// SubmitProposal 提交新提案
+// SubmitProposal submits a new proposal
 func (c *TruthValidatorClient) SubmitProposal(
 	ctx context.Context,
 	wallet *Wallet,
 	chainID *big.Int,
 	contentHash string,
 ) (common.Hash, error) {
-	// 创建交易签名者
+	// Create transaction signer
 	opts, err := wallet.NewTransactor(chainID)
 	if err != nil {
 		return common.Hash{}, err
 	}
 	opts.Context = ctx
 
-	// 调用合约提交提案
+	// Call contract to submit proposal
 	tx, err := c.contract.SubmitProposal(opts, contentHash)
 	if err != nil {
 		return common.Hash{}, err
@@ -39,12 +39,12 @@ func (c *TruthValidatorClient) SubmitProposal(
 	return tx.Hash(), nil
 }
 
-// GetProposal 获取提案信息
+// GetProposal gets proposal information
 func (c *TruthValidatorClient) GetProposal(
 	ctx context.Context,
 	proposalID *big.Int,
 ) (*ProposalInfo, error) {
-	// 查询提案基础信息
+	// Query basic proposal info
 	proposal, err := c.contract.Proposals(&bind.CallOpts{
 		Context: ctx,
 	}, proposalID)
@@ -52,7 +52,7 @@ func (c *TruthValidatorClient) GetProposal(
 		return nil, err
 	}
 
-	// 查询投票统计
+	// Query vote counts
 	voteCounts, err := c.contract.GetVoteCounts(&bind.CallOpts{
 		Context: ctx,
 	}, proposalID)
@@ -63,9 +63,9 @@ func (c *TruthValidatorClient) GetProposal(
 	totalVotes := new(big.Int).Add(voteCounts.YesVotes, voteCounts.NoVotes)
 
 	return &ProposalInfo{
-		Proposer:    common.HexToAddress("0x0"), // 合约中未存储proposer，使用默认值
+		Proposer:    common.HexToAddress("0x0"), // Default value since contract doesn't store proposer
 		ContentHash: proposal.Content,
-		Status:      uint8(0), // 0=进行中,1=已通过,2=已拒绝
+		Status:      uint8(0), // 0=active, 1=approved, 2=rejected
 		VoteCount:   totalVotes,
 	}, nil
 }

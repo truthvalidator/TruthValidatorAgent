@@ -2,8 +2,7 @@
 module ssaisearch
 
 go 1.22
-
-toolchain go1.23.2
+toolchain go1.24.1
 
 require (
 	// GoX utilities for common operations
@@ -14,7 +13,7 @@ require (
 
 	// IPFS core components for decentralized storage
 	github.com/ipfs/go-cid v0.5.0 // Content ID handling
-	github.com/ipfs/go-unixfsnode v1.9.2 // UnixFS data handling
+	github.com/ipfs/go-unixfsnode v1.10.0 // UnixFS data handling
 	github.com/ipld/go-car/v2 v2.14.2 // Content Addressable Archives
 	github.com/ipld/go-codec-dagpb v1.6.0 // Protocol Buffers codec
 	github.com/ipld/go-ipld-prime v0.21.0 // IPLD core interfaces
@@ -52,7 +51,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
+	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/minio/sha256-simd v1.0.1 // indirect
@@ -76,12 +75,12 @@ require (
 	github.com/whyrusleeping/cbor-gen v0.1.2 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/crypto v0.31.0 // indirect
-	golang.org/x/exp v0.0.0-20240719175910-8a7402abbf56 // indirect
+	golang.org/x/exp v0.0.0-20241217172543-b2144cdd0a67 // indirect
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/protobuf v1.34.2 // indirect
+	google.golang.org/protobuf v1.36.0 // indirect
 	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	lukechampine.com/blake3 v1.3.0 // indirect

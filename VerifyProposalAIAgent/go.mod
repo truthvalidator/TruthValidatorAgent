@@ -16,7 +16,7 @@ go 1.22.5 // Minimum Go version
 
 require (
 	github.com/ethereum/go-ethereum v1.14.13
-	github.com/go-telegram/bot v1.13.3
+	github.com/go-telegram/bot v1.14.2
 	github.com/joho/godotenv v1.5.1
 	github.com/mnt-ltd/daemore v0.0.0-20240227053424-d57afb9f5e67
 	github.com/spf13/cobra v1.7.0

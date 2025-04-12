@@ -73,7 +73,9 @@ func removeFromWhitelist(username string) {
 	}
 }
 
-// loadAdminUsernames
+// loadAdminUsernames loads admin usernames from TG_BOT_ADMINS env var
+// Format: "user1,user2,user3"
+// Returns nil if env var not set
 func loadAdminUsernames() error {
 	adminUsernamesEnv := os.Getenv("TG_BOT_ADMINS")
 	if adminUsernamesEnv == "" {
@@ -83,11 +85,25 @@ func loadAdminUsernames() error {
 	return nil
 }
 
-// aisearchCmd represents the aisearch command
+// aisearchCmd represents the Telegram bot command with AI search capabilities
 var aisearchCmd = &cobra.Command{
 	Use:   "aisearch",
-	Short: "Start the Telegram bot service with AI search integration",
-	Long:  `Start the TruthValidatorSentientNet-tgbot Telegram bot service with AI search integration.`,
+	Short: "Start AI-powered Telegram bot service",
+	Long: `TruthValidator AI Telegram Bot provides interactive access to the decentralized verification network.
+
+Features:
+- Submit claims for AI verification
+- Get real-time verification results
+- Administer whitelist and permissions
+- Query blockchain verification records
+
+Examples:
+  Start bot with default settings:
+    ./TruthValidatorSentientNet-tgbot aisearch
+
+  Start with custom config:
+    TG_BOT_TOKEN=your_token NETWORK=sapphire-testnet ./TruthValidatorSentientNet-tgbot aisearch
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := godotenv.Load(); err != nil {
 			logger.Warn("No .env file found or error loading .env file:", zap.Error(err))
@@ -191,7 +207,8 @@ func reloadWhitelist() {
 	whitelist = getWhitelist()
 }
 
-// getAdminUsernames
+// getAdminUsernames retrieves admin usernames from TG_BOT_ADMINS env var
+// Returns empty slice if env var not set
 func getAdminUsernames() []string {
 	adminUsernamesEnv := os.Getenv("TG_BOT_ADMINS")
 	if adminUsernamesEnv == "" {
@@ -202,6 +219,8 @@ func getAdminUsernames() []string {
 
 var adminUsernames = getAdminUsernames()
 
+// isAdmin checks if the given username is in the admin list
+// Returns true if username is found in adminUsernames slice
 func isAdmin(username string) bool {
 	for _, adminUsername := range adminUsernames {
 		if adminUsername == username {
@@ -211,7 +230,8 @@ func isAdmin(username string) bool {
 	return false
 }
 
-// addAdmin
+// addAdmin adds a username to the admin list if not already present
+// Does nothing if username is already in adminUsernames slice
 func addAdmin(username string) {
 	for _, adminUsername := range adminUsernames {
 		if adminUsername == username {
@@ -627,7 +647,6 @@ func listenForProposalResult(ctx context.Context, b *bot.Bot, chatID int64, prop
 			voterResults.WriteString(fmt.Sprintf("AI-Voter: %s\n", vote.Voter.String()))
 			voterResults.WriteString(fmt.Sprintf("Vote: %s \n", voteInfo))
 			voterResults.WriteString(fmt.Sprintf("Reason: %s\n\n", reason))
-			// voterResults.WriteString("\n") // Extra line break after each voter block
 		}
 		// voterResults.WriteString("----------------------\n") // Final separator
 

@@ -17,8 +17,22 @@ var (
 
 var rootCmd = &cobra.Command{
 	Use:   "TruthValidatorSentientNet-tgbot",
-	Short: "TruthValidatorSentientNet-tgbot, a Golang Bot for Telegram",
-	Long:  `TruthValidatorSentientNet-tgbot is a Golang Bot for Telegram`,
+	Short: "Telegram bot for TruthValidator's AI Agent Network",
+	Long: `TruthValidator Telegram Bot provides interactive access to the AI Agent Network.
+
+Features:
+- Submit and verify proposals
+- Participate in decentralized voting
+- Get real-time network status
+- Administer validator nodes
+- Query blockchain data
+
+Examples:
+  Start bot with Sapphire testnet:
+    NETWORK=sapphire-testnet ./TruthValidatorSentientNet-tgbot
+
+  Get help:
+    ./TruthValidatorSentientNet-tgbot --help`,
 }
 
 func Execute() {
@@ -38,14 +52,27 @@ func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-// ExitWithError terminates the program after writing the error to stderr.
+// ExitWithError terminates the program with a descriptive error message.
+// Includes troubleshooting tips for common errors.
 func ExitWithError(msg string, err error) {
-	fmt.Fprintf(os.Stderr, "ERROR: %s: %v\n", msg, err)
+	fmt.Fprintf(os.Stderr, "🚨 ERROR: %s: %v\n", msg, err)
+	fmt.Fprintln(os.Stderr, "\nTroubleshooting:")
+	fmt.Fprintln(os.Stderr, "- Check NETWORK environment variable is set")
+	fmt.Fprintln(os.Stderr, "- Verify blockchain node connectivity")
+	fmt.Fprintln(os.Stderr, "- Ensure proper bot API token configuration")
 	os.Exit(1)
 }
 
-// GetNetworkAddress returns the dial address of the network specified via the
-// network flag. If the network is unknown, it exits with an error.
+// GetNetworkAddress returns the RPC endpoint for the configured blockchain network.
+// Supported networks:
+//   - sapphire: Mainnet Oasis Sapphire
+//   - sapphire-testnet: Oasis Sapphire testnet  
+//   - sapphire-localnet: Local development network
+//   - eth-localnet: Local Ethereum node
+//   - sepolia: Ethereum Sepolia testnet
+//
+// Requires NETWORK environment variable to be set.
+// For Sepolia networks, INFURA_PROJECT_ID must also be configured.
 func GetNetworkAddress() string {
 	networks := map[string]string{
 		"sapphire":          "https://sapphire.oasis.io",

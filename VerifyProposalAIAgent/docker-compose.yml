@@ -1,17 +1,37 @@
 version: '3.8'
 
 services:
+  # Telegram Bot Service - Handles AI search integration via Telegram
+  # Features:
+  # - Real-time proposal validation queries
+  # - Admin command interface
+  # - Whitelist-based access control
   tvsn-tgbot:
     build:
       context: . 
-      dockerfile: docker/Dockerfile  
-    container_name: tvsn-tgbot
+      dockerfile: docker/Dockerfile  # Build using custom Dockerfile
+    
+    container_name: tvsn-tgbot  # Explicit container naming
+    
     environment:
-      TG_BOT_TOKEN: ""  
+      # Telegram Bot API token (required)
+      TG_BOT_TOKEN: ""
+      
+      # Comma-separated list of admin user IDs
       TG_BOT_ADMINS: "" 
+      
+      # Comma-separated list of whitelisted chat IDs
       TG_BOT_WHITELIST: ""
-      AI_SEARCH_URL: "",
+      
+      # URL endpoint for AI search service
+      AI_SEARCH_URL: ""
+    
+    # Mount whitelist configuration file
     volumes:
       - ./whitelist.json:/root/whitelist.json  
+    
+    # Startup command - runs the Telegram bot with AI search enabled
     command: ["/root/TruthValidator-tgbot", "aisearch"]
-    restart: always 
+    
+    # Auto-restart policy for reliability
+    restart: always

@@ -1,6 +1,18 @@
+// TruthValidator Agent Go Module
+//
+// This module defines the dependencies for the TruthValidator Agent,
+// which provides decentralized proposal validation and voting functionality.
+//
+// Key Dependencies:
+// - go-ethereum: Ethereum client library
+// - sapphire-paratime: Oasis Sapphire compatibility
+// - cobra: CLI framework
+// - zap: Logging
+//
+// Go version: 1.22.5 (minimum required)
 module github.com/truthvalidator/TruthValidatorAgent/VerifyProposalAIAgent
 
-go 1.22.5
+go 1.22.5 // Minimum Go version
 
 require (
 	github.com/ethereum/go-ethereum v1.14.13

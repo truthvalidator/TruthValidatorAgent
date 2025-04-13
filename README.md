@@ -1,12 +1,23 @@
 
 # TruthValidator - Guardians of Digital Truth
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE-APACHE)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE-MIT)
-
 **A Decentralized Truth Verification Protocol for the Post-Information Age**
 
-## 🌍 Our Mission
+
+# The Information Trust Crisis
+The World Economic Forum's 2024 Global Risks Report identifies misinformation and disinformation as the top global risk, with AI dramatically accelerating its spread and impact:
+
+1. Election Threats: AI-generated content poses unprecedented challenges to electoral integrity worldwide, potentially undermining public trust in democratic processes
+2. Societal Division: Misinformation fuels polarization by creating alternate perceptions of reality across ideological lines
+3. Economic Impact: Significant losses across financial markets, healthcare, and commerce from manipulated information
+4. AI Acceleration: Synthetic content is becoming indistinguishable from human-created material, overwhelming current detection systems
+# TruthValidator's Solution
+TruthValidator addresses this crisis through a decentralized verification protocol combining:
+
+1. AI-Powered Analysis: Using RAG (Retrieval-Augmented Generation) to cross-reference claims against trusted knowledge bases
+2. Community Consensus: Distributed voting among verified participants ensures democratic truth determination
+3. Immutable Records: All verification evidence permanently stored on IPFS with blockchain-anchored metadata
+
+# 🌍 Our Mission
 
 In an era of rampant misinformation, TruthValidator stands as a beacon of hope - a decentralized protocol that empowers humanity to collectively safeguard information sovereignty. We're building the infrastructure for a world where truth is verified, not dictated; where information integrity is protected by technology, not compromised by it.
 
@@ -16,7 +27,7 @@ This open-source project represents a radical reimagining of how society establi
 - **Community governance** that empowers without exclusion
 - **Immutable storage** that preserves without alteration
 
-## Project Overview
+# Project Overview
 
 TruthValidator is more than software - it's a movement. This open-source protocol provides:
 - A **decentralized verification network** where no single entity controls the truth
@@ -51,7 +62,7 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 * **Academic Rigor:** Decentralized validation of research claims
 * **Historical Preservation:** Immutable records of significant events
 
-## System Architecture
+# System Architecture
 
 ![System Architecture](./docs/imgs/arch_new.png)
 
@@ -63,7 +74,7 @@ Users submit proposals to blockchain smart contracts through **robots**. The sys
 * **AI Search Module (Golang):** Retrieves web information using SearxNG.
 * **Telegram Bot (Golang):** Serves as the user interface for submissions and results.
 
-## Technologies
+# Technologies
 
 * **AI:** RAG, LLM, Metasearch API
 * **Filecoin:** Decentralized storage for voting evidence(Filecoin lassie & Storacha)
@@ -101,7 +112,7 @@ gantt
     Dispute Resolution          :2026-01-01, 2026-09-30
 ```
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 We welcome contributions from developers, researchers, and truth-seekers worldwide. Here's how you can help:
 
@@ -122,7 +133,7 @@ We welcome contributions from developers, researchers, and truth-seekers worldwi
 
 See our [Contribution Guidelines](CONTRIBUTING.md) for more details.
 
-## ✊ Join the Truth Revolution
+# ✊ Join the Truth Revolution
 
 This is more than code - it's the foundation for a new information age. We invite developers, researchers, and truth-seekers worldwide to contribute to this open-source movement. Together, we can build:
 
@@ -136,7 +147,7 @@ This is more than code - it's the foundation for a new information age. We invit
 📜 [Read the Lightpaper](https://www.truthvalidator.xyz/lightpaper)
 
 
-## 📜 License
+# 📜 License
 TruthValidator is dual-licensed under:
 - [Apache License 2.0](./LICENSE-APACHE)
 - [MIT License](./LICENSE-MIT)

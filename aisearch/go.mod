@@ -7,7 +7,7 @@ toolchain go1.23.2
 
 require (
 	// GoX utilities for common operations
-	github.com/KevinZonda/GoX v0.0.15
+	github.com/KevinZonda/GoX v0.0.22
 	// Gin web framework for API endpoints
 	github.com/gin-contrib/cors v1.7.1
 	github.com/gin-gonic/gin v1.10.0

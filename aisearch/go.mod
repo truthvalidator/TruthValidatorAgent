@@ -16,7 +16,7 @@ require (
 	github.com/ipfs/go-cid v0.5.0 // Content ID handling
 	github.com/ipfs/go-unixfsnode v1.9.2 // UnixFS data handling
 	github.com/ipld/go-car/v2 v2.14.2 // Content Addressable Archives
-	github.com/ipld/go-codec-dagpb v1.6.0 // Protocol Buffers codec
+	github.com/ipld/go-codec-dagpb v1.7.0 // Protocol Buffers codec
 	github.com/ipld/go-ipld-prime v0.21.0 // IPLD core interfaces
 
 	// Environment configuration
@@ -81,7 +81,7 @@ require (
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/protobuf v1.34.2 // indirect
+	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	lukechampine.com/blake3 v1.3.0 // indirect

@@ -29,11 +29,33 @@ graph LR
 ```
 
 **Core Components:**
-- **EVM-Compatible Smart Contracts:** TruthValidatorSentientNet.sol (deployable on Filecoin, Ethereum, Polygon)
+- **EVM-Compatible Smart Contracts:** TruthValidatorSentientNet.sol (deployable on Filecoin FEVM, Ethereum, Polygon)
 - **Golang AI Agent:** Integrates AI judgment with blockchain
 - **IPFS/Filecoin Bridge:** For evidence storage
 - **Telegram Bot Interface:** User interaction layer
 
+
+## 🚀 Deployment Options
+
+### Filecoin FEVM Deployment
+```bash
+# Deploy to Filecoin FEVM Calibration testnet
+export PRIVATE_KEY="your_testnet_private_key_here"
+./TruthValidatorAgent deploy --fevm
+
+# For mainnet deployment use:
+# export PRIVATE_KEY="your_mainnet_private_key_here"
+# ./TruthValidatorAgent deploy --fevm --rpc https://api.node.glif.io/rpc/v1
+
+# Run FEVM tests
+make test-fevm
+```
+
+### Ethereum/Polygon Deployment
+```bash
+# Deploy to default network (configured in config)
+./TruthValidatorAgent deploy
+```
 
 ## 🌱 Contributing to Decentralized Governance
 

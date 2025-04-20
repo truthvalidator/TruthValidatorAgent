@@ -62,11 +62,11 @@ type Connection struct {
 	Address common.Address
 }
 
-// NewConnection establishes a new Ethereum network connection
+// NewConnection establishes a new Ethereum or Filecoin FEVM network connection
 //
 // Parameters:
 //   ctx - Context for cancellation and timeouts
-//   where - Network RPC endpoint URL (e.g. "https://mainnet.infura.io")
+//   where - Network RPC endpoint URL (e.g. "https://mainnet.infura.io" or FEVM endpoint)
 //
 // Returns:
 //   *Connection - Configured connection instance
@@ -94,9 +94,15 @@ func NewConnection(ctx context.Context, where string) (*Connection, error) {
 		return nil, err
 	}
 
-	c.ChainID, err = c.Client.NetworkID(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("unable to get chain ID: %v", err)
+	// Special handling for Filecoin FEVM
+	if strings.Contains(where, "filecoin") || strings.Contains(where, "fevm") {
+		// FEVM uses Ethereum chain ID 314 for mainnet
+		c.ChainID = big.NewInt(314)
+	} else {
+		c.ChainID, err = c.Client.NetworkID(ctx)
+		if err != nil {
+			return nil, fmt.Errorf("unable to get chain ID: %v", err)
+		}
 	}
 
 	pk := os.Getenv("PRIVATE_KEY")

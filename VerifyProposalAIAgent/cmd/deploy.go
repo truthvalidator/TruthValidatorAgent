@@ -16,9 +16,19 @@ import (
 
 var deployCmd = &cobra.Command{
 	Use:   "deploy",
-	Short: "Deploy the TruthValidatorSentientNet contract",
-	Args:  cobra.NoArgs,
-	Run:   Deploy,
+	Short: "Deploy the TruthValidatorSentientNet contract to Ethereum or Filecoin FEVM",
+	Long: `Deploys the TruthValidatorSentientNet contract to either:
+- Ethereum network (default)
+- Filecoin FEVM (when --fevm flag is used)`,
+	Args: cobra.NoArgs,
+	Run:  Deploy,
+}
+
+var fevmFlag bool
+
+func init() {
+	deployCmd.Flags().BoolVar(&fevmFlag, "fevm", false, "Deploy to Filecoin FEVM network")
+	RootCmd.AddCommand(deployCmd)
 }
 
 func init() {
@@ -30,8 +40,16 @@ func Deploy(cmd *cobra.Command, args []string) {
 	ctx, cancelCtx := context.WithTimeout(context.Background(), time.Duration(time.Second*60))
 	defer cancelCtx()
 
-	// Connect to the network.
-	conn, err := connection.NewConnection(ctx, GetNetworkAddress())
+	var networkAddr string
+	if fevmFlag {
+		networkAddr = "https://api.calibration.node.glif.io/rpc/v1" // FEVM Calibration testnet RPC
+		fmt.Fprintf(os.Stderr, "Deploying to Filecoin FEVM network...\n")
+	} else {
+		networkAddr = GetNetworkAddress()
+	}
+
+	// Connect to the network
+	conn, err := connection.NewConnection(ctx, networkAddr)
 	if err != nil {
 		ExitWithError("Unable to connect", err)
 	}
@@ -42,7 +60,11 @@ func Deploy(cmd *cobra.Command, args []string) {
 		ExitWithError("Failed to prepare next tx", err)
 	}
 
-	fmt.Fprintf(os.Stderr, "Deploying TruthValidatorSentientNet contract...\n")
+	if fevmFlag {
+		fmt.Fprintf(os.Stderr, "Deploying TruthValidatorSentientNet contract to Filecoin FEVM...\n")
+	} else {
+		fmt.Fprintf(os.Stderr, "Deploying TruthValidatorSentientNet contract...\n")
+	}
 
 	searchAddr, deployTx, _, err := searchStorage.DeployTruthValidatorSentientNet(auth, conn.Client)
 	if err != nil {

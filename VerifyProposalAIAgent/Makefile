@@ -61,6 +61,17 @@ test-eth-localnet:
 	@printf "$(CYAN)*** Running end-to-end tests...$(OFF)\n"
 	@./test-e2e-eth-local.sh
 
+# Run tests against Filecoin FEVM
+test-fevm:
+	@printf "$(CYAN)*** Running FEVM end-to-end tests...$(OFF)\n"
+	@chmod +x test-e2e-fevm.sh
+	@./test-e2e-fevm.sh
+
+# Run tests against local FEVM network
+test-fevm-local:
+	@printf "$(CYAN)*** Running local FEVM tests...$(OFF)\n"
+	@echo "FEVM local testing not yet implemented"
+
 # Install development dependencies
 install-deps:
 ifeq ($(shell which abigen),)
@@ -98,6 +109,8 @@ help:
 	@echo "  test             - Run standard end-to-end tests"
 	@echo "  test-sepolia-testnet - Run tests against Sepolia testnet"
 	@echo "  test-eth-localnet - Run tests against local Ethereum network"
+	@echo "  test-fevm        - Run tests against Filecoin FEVM"
+	@echo "  test-fevm-local  - Run tests against local FEVM network"
 	@echo "  install-deps     - Install development dependencies"
 	@echo "  run-localnet     - Start local development network"
 	@echo "  run-localnet-debug - Start local network in debug mode"

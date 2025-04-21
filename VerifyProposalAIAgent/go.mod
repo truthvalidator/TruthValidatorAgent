@@ -17,7 +17,7 @@ go 1.23.0 // Minimum Go version
 toolchain go1.24.1
 
 require (
-	github.com/ethereum/go-ethereum v1.15.8
+	github.com/ethereum/go-ethereum v1.15.9
 	github.com/go-telegram/bot v1.14.2
 	github.com/joho/godotenv v1.5.1
 	github.com/mnt-ltd/daemore v0.0.0-20240227053424-d57afb9f5e67

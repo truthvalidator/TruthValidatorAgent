@@ -18,7 +18,7 @@ toolchain go1.24.1
 
 require (
 	github.com/ethereum/go-ethereum v1.15.10
-	github.com/go-telegram/bot v1.14.2
+	github.com/go-telegram/bot v1.15.0
 	github.com/joho/godotenv v1.5.1
 	github.com/mnt-ltd/daemore v0.0.0-20240227053424-d57afb9f5e67
 	github.com/spf13/cobra v1.9.1

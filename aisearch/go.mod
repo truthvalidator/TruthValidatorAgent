@@ -29,7 +29,7 @@ require (
 	github.com/sashabaranov/go-openai v1.40.0
 
 	// Database ORM for persistent storage
-	gorm.io/gorm v1.26.0
+	gorm.io/gorm v1.26.1
 )
 
 require (

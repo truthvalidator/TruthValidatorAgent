@@ -10,7 +10,7 @@ require (
 	github.com/KevinZonda/GoX v0.0.22
 	// Gin web framework for API endpoints
 	github.com/gin-contrib/cors v1.7.1
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 
 	// IPFS core components for decentralized storage
 	github.com/ipfs/go-cid v0.5.0 // Content ID handling

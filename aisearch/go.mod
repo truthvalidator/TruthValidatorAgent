@@ -24,7 +24,7 @@ require (
 	github.com/promptc/promptc-go v0.1.2
 
 	// OpenAI API client for LLM integration
-	github.com/sashabaranov/go-openai v1.40.5
+	github.com/sashabaranov/go-openai v1.41.0
 
 	// Database ORM for persistent storage
 	gorm.io/gorm v1.26.0

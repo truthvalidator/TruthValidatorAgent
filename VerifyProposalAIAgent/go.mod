@@ -22,7 +22,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/mnt-ltd/daemore v0.0.0-20240227053424-d57afb9f5e67
 	github.com/spf13/cobra v1.9.1
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 replace github.com/cometbft/cometbft => github.com/oasisprotocol/cometbft v0.37.2-oasis1
